@@ -1,0 +1,7 @@
+**/bin/
+**/obj/
+*/App_Data/*.mdf
+*/App_Data/*.ldf
+*/App_Data/*.MDF
+*/App_Data/*.LDF
+

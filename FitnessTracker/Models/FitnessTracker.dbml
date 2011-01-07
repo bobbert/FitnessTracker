@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="FitnessTracker" Class="FitnessTrackerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\FitnessTracker.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FitnessTrackerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ExerciseTypes" Member="ExerciseTypes">
+    <Type Name="ExerciseType">
+      <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="ExerciseType_WorkoutRegimen" Member="WorkoutRegimens" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="WorkoutRegimen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Workouts" Member="Workouts">
+    <Type Name="Workout">
+      <Column Name="WorkoutId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WorkoutRegimenId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Pace" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Duration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="WorkoutRegimen_Workout" Member="WorkoutRegimen" ThisKey="WorkoutRegimenId" OtherKey="WorkoutRegimenId" Type="WorkoutRegimen" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorkoutRegimens" Member="WorkoutRegimens">
+    <Type Name="WorkoutRegimen">
+      <Column Name="WorkoutRegimenId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NumWeeks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DaysPerWeek" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartingPace" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="FinishingPace" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="StartingDuration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FinishingDuration" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="WorkoutRegimen_Workout" Member="Workouts" ThisKey="WorkoutRegimenId" OtherKey="WorkoutRegimenId" Type="Workout" />
+      <Association Name="ExerciseType_WorkoutRegimen" Member="ExerciseType" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="ExerciseType" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
