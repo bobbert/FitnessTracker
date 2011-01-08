@@ -44,14 +44,8 @@ namespace FitnessTracker.Controllers
                 if (MembershipService.ValidateUser(model.UserName, model.Password))
                 {
                     FormsService.SignIn(model.UserName, model.RememberMe);
-                    if (!String.IsNullOrEmpty(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    // RWP 1/7/11: redirect to Workout Regimen index page after redirect
+                    return RedirectToAction("PostRegisterUser", "Home");
                 }
                 else
                 {

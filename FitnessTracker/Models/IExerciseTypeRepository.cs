@@ -5,6 +5,8 @@ namespace FitnessTracker.Models
 {
     public interface IExerciseTypeRepository
     {
+        FitnessTrackerDataContext DataContext { get; }
+
         IQueryable<ExerciseType> FindAllExerciseTypes();
         IQueryable<ExerciseType> FindByName(string name);
 

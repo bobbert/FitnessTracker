@@ -8,29 +8,33 @@ namespace FitnessTracker.Models
 {
     public class ExerciseTypeRepository : IExerciseTypeRepository 
     {
-        private FitnessTrackerDataContext _db;
+        public FitnessTrackerDataContext DataContext { get; private set; }
 
-        public ExerciseTypeRepository() 
+        // Constructors
+
+        public ExerciseTypeRepository() : this(new FitnessTrackerDataContext()) { }
+
+        public ExerciseTypeRepository(FitnessTrackerDataContext dataContext)
         {
-            _db = new FitnessTrackerDataContext(); 
-        } 
+            DataContext = dataContext;
+        }
 
         //
         // Query Methods
 
         public IQueryable<ExerciseType> FindByName(string name)
         {
-            return _db.ExerciseTypes.Where(d => (d.Name == name));
+            return DataContext.ExerciseTypes.Where(d => (d.Name == name));
         }
 
         public IQueryable<ExerciseType> FindAllExerciseTypes()
         {
-            return _db.ExerciseTypes;
+            return DataContext.ExerciseTypes;
         }
 
         public ExerciseType GetExerciseType(int id)
         {
-            return _db.ExerciseTypes.SingleOrDefault(d => d.ExerciseTypeId == id);
+            return DataContext.ExerciseTypes.SingleOrDefault(d => d.ExerciseTypeId == id);
         }
 
         //
@@ -38,12 +42,12 @@ namespace FitnessTracker.Models
 
         public void Add(ExerciseType exerciseType)
         {
-            _db.ExerciseTypes.InsertOnSubmit(exerciseType);
+            DataContext.ExerciseTypes.InsertOnSubmit(exerciseType);
         }
 
         public void Delete(ExerciseType exerciseType)
         {
-            _db.ExerciseTypes.DeleteOnSubmit(exerciseType);
+            DataContext.ExerciseTypes.DeleteOnSubmit(exerciseType);
         }
 
         //
@@ -51,7 +55,7 @@ namespace FitnessTracker.Models
 
         public void Save()
         {
-            _db.SubmitChanges();
+            DataContext.SubmitChanges();
         }
 
     }

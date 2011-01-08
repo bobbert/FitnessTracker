@@ -2,36 +2,49 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FitnessTracker">
   <DataContextMoniker Name="/FitnessTrackerDataContext" />
   <nestedChildShapes>
-    <classShape Id="d4183cec-022b-4024-8bf2-8cc2b80058a3" absoluteBounds="0.75, 1.75, 2, 1.1939925130208335">
+    <classShape Id="d4183cec-022b-4024-8bf2-8cc2b80058a3" absoluteBounds="0.5, 1, 2, 1.1939925130208335">
       <DataClassMoniker Name="/FitnessTrackerDataContext/ExerciseType" />
       <nestedChildShapes>
-        <elementListCompartment Id="10c2533e-be3f-4f0f-ba6b-387b4e028c5e" absoluteBounds="0.765, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="10c2533e-be3f-4f0f-ba6b-387b4e028c5e" absoluteBounds="0.515, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="807d3d7e-0c0e-46bd-81f0-c39d1aedea89" absoluteBounds="6.25, 1.5, 2, 1.7708968098958333">
+    <classShape Id="807d3d7e-0c0e-46bd-81f0-c39d1aedea89" absoluteBounds="5.5, 1.5, 2, 1.7708968098958333">
       <DataClassMoniker Name="/FitnessTrackerDataContext/Workout" />
       <nestedChildShapes>
-        <elementListCompartment Id="f357ca26-fdc2-4f66-b46c-162c225262f3" absoluteBounds="6.265, 1.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f357ca26-fdc2-4f66-b46c-162c225262f3" absoluteBounds="5.515, 1.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d6dbf623-0bd1-45c4-8c37-d570ec0d4aae" absoluteBounds="3.5, 1, 2, 2.7324039713541666">
+    <classShape Id="9557b112-667e-4687-b540-a5673a1e4af2" absoluteBounds="0.5, 2.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/FitnessTrackerDataContext/FitnessUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9467ef19-4656-4aa9-86ed-ed9a2a3a60ac" absoluteBounds="0.51500000000000012, 2.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="56a36c8a-0a30-4376-a7d7-6c87d94beae1" absoluteBounds="3, 1.125, 2, 2.7324039713541666">
       <DataClassMoniker Name="/FitnessTrackerDataContext/WorkoutRegimen" />
       <nestedChildShapes>
-        <elementListCompartment Id="9ffbb47c-dbeb-4d21-b398-f190865f4999" absoluteBounds="3.515, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a615089a-5fbe-498b-890b-08d2f0439170" absoluteBounds="3.015, 1.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 2.38544840494792); (6.25 : 2.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5 : 2.38544840494792); (5.5 : 2.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/FitnessTrackerDataContext/WorkoutRegimen/WorkoutRegimen_Workout" />
       <nodes>
-        <classShapeMoniker Id="d6dbf623-0bd1-45c4-8c37-d570ec0d4aae" />
+        <classShapeMoniker Id="56a36c8a-0a30-4376-a7d7-6c87d94beae1" />
         <classShapeMoniker Id="807d3d7e-0c0e-46bd-81f0-c39d1aedea89" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.34699625651042); (3.5 : 2.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 1.65949625651042); (3 : 1.65949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/FitnessTrackerDataContext/ExerciseType/ExerciseType_WorkoutRegimen" />
       <nodes>
         <classShapeMoniker Id="d4183cec-022b-4024-8bf2-8cc2b80058a3" />
-        <classShapeMoniker Id="d6dbf623-0bd1-45c4-8c37-d570ec0d4aae" />
+        <classShapeMoniker Id="56a36c8a-0a30-4376-a7d7-6c87d94beae1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 3.11620198567708); (3 : 3.11620198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/FitnessTrackerDataContext/FitnessUser/FitnessUser_WorkoutRegimen" />
+      <nodes>
+        <classShapeMoniker Id="9557b112-667e-4687-b540-a5673a1e4af2" />
+        <classShapeMoniker Id="56a36c8a-0a30-4376-a7d7-6c87d94beae1" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -4,4 +4,6 @@
 */App_Data/*.ldf
 */App_Data/*.MDF
 */App_Data/*.LDF
+FitnessTracker.suo
+TestResults/
 

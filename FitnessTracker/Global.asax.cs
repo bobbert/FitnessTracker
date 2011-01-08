@@ -17,11 +17,29 @@ namespace FitnessTracker
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "ExerciseType", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                "Workout", 
+                "WorkoutRegimens/{WorkoutRegimenId}/Workouts/{action}/{id}",
+                new { controller = "Workout", action = "Index",  id = UrlParameter.Optional },
+                new { WorkoutRegimenId = @"\d+" }
             );
 
+            routes.MapRoute(
+                "WorkoutRegimen",
+                "WorkoutRegimens/{action}/{id}",
+                new { controller = "WorkoutRegimen", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "ExerciseType", 
+                "ExerciseTypes/{action}/{id}", 
+                new { controller = "ExerciseType", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            );
         }
 
         protected void Application_Start()

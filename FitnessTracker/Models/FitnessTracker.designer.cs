@@ -36,6 +36,9 @@ namespace FitnessTracker.Models
     partial void InsertWorkout(Workout instance);
     partial void UpdateWorkout(Workout instance);
     partial void DeleteWorkout(Workout instance);
+    partial void InsertFitnessUser(FitnessUser instance);
+    partial void UpdateFitnessUser(FitnessUser instance);
+    partial void DeleteFitnessUser(FitnessUser instance);
     partial void InsertWorkoutRegimen(WorkoutRegimen instance);
     partial void UpdateWorkoutRegimen(WorkoutRegimen instance);
     partial void DeleteWorkoutRegimen(WorkoutRegimen instance);
@@ -84,6 +87,14 @@ namespace FitnessTracker.Models
 			get
 			{
 				return this.GetTable<Workout>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FitnessUser> FitnessUsers
+		{
+			get
+			{
+				return this.GetTable<FitnessUser>();
 			}
 		}
 		
@@ -409,6 +420,168 @@ namespace FitnessTracker.Models
 		}
 	}
 	
+	[Table(Name="dbo.FitnessUsers")]
+	public partial class FitnessUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FitnessUserId;
+		
+		private string _UserName;
+		
+		private System.DateTime _DateCreated;
+		
+		private System.DateTime _DateLastVisited;
+		
+		private EntitySet<WorkoutRegimen> _WorkoutRegimens;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFitnessUserIdChanging(int value);
+    partial void OnFitnessUserIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnDateCreatedChanging(System.DateTime value);
+    partial void OnDateCreatedChanged();
+    partial void OnDateLastVisitedChanging(System.DateTime value);
+    partial void OnDateLastVisitedChanged();
+    #endregion
+		
+		public FitnessUser()
+		{
+			this._WorkoutRegimens = new EntitySet<WorkoutRegimen>(new Action<WorkoutRegimen>(this.attach_WorkoutRegimens), new Action<WorkoutRegimen>(this.detach_WorkoutRegimens));
+			OnCreated();
+		}
+		
+		[Column(Storage="_FitnessUserId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int FitnessUserId
+		{
+			get
+			{
+				return this._FitnessUserId;
+			}
+			set
+			{
+				if ((this._FitnessUserId != value))
+				{
+					this.OnFitnessUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._FitnessUserId = value;
+					this.SendPropertyChanged("FitnessUserId");
+					this.OnFitnessUserIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UserName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_DateLastVisited", DbType="DateTime NOT NULL")]
+		public System.DateTime DateLastVisited
+		{
+			get
+			{
+				return this._DateLastVisited;
+			}
+			set
+			{
+				if ((this._DateLastVisited != value))
+				{
+					this.OnDateLastVisitedChanging(value);
+					this.SendPropertyChanging();
+					this._DateLastVisited = value;
+					this.SendPropertyChanged("DateLastVisited");
+					this.OnDateLastVisitedChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FitnessUser_WorkoutRegimen", Storage="_WorkoutRegimens", ThisKey="FitnessUserId", OtherKey="FitnessUserId")]
+		public EntitySet<WorkoutRegimen> WorkoutRegimens
+		{
+			get
+			{
+				return this._WorkoutRegimens;
+			}
+			set
+			{
+				this._WorkoutRegimens.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_WorkoutRegimens(WorkoutRegimen entity)
+		{
+			this.SendPropertyChanging();
+			entity.FitnessUser = this;
+		}
+		
+		private void detach_WorkoutRegimens(WorkoutRegimen entity)
+		{
+			this.SendPropertyChanging();
+			entity.FitnessUser = null;
+		}
+	}
+	
 	[Table(Name="dbo.WorkoutRegimens")]
 	public partial class WorkoutRegimen : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -417,9 +590,9 @@ namespace FitnessTracker.Models
 		
 		private int _WorkoutRegimenId;
 		
-		private int _ExerciseTypeId;
+		private int _FitnessUserId;
 		
-		private string _Person;
+		private int _ExerciseTypeId;
 		
 		private System.DateTime _StartDate;
 		
@@ -439,16 +612,18 @@ namespace FitnessTracker.Models
 		
 		private EntityRef<ExerciseType> _ExerciseType;
 		
+		private EntityRef<FitnessUser> _FitnessUser;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnWorkoutRegimenIdChanging(int value);
     partial void OnWorkoutRegimenIdChanged();
+    partial void OnFitnessUserIdChanging(int value);
+    partial void OnFitnessUserIdChanged();
     partial void OnExerciseTypeIdChanging(int value);
     partial void OnExerciseTypeIdChanged();
-    partial void OnPersonChanging(string value);
-    partial void OnPersonChanged();
     partial void OnStartDateChanging(System.DateTime value);
     partial void OnStartDateChanged();
     partial void OnNumWeeksChanging(int value);
@@ -469,6 +644,7 @@ namespace FitnessTracker.Models
 		{
 			this._Workouts = new EntitySet<Workout>(new Action<Workout>(this.attach_Workouts), new Action<Workout>(this.detach_Workouts));
 			this._ExerciseType = default(EntityRef<ExerciseType>);
+			this._FitnessUser = default(EntityRef<FitnessUser>);
 			OnCreated();
 		}
 		
@@ -488,6 +664,30 @@ namespace FitnessTracker.Models
 					this._WorkoutRegimenId = value;
 					this.SendPropertyChanged("WorkoutRegimenId");
 					this.OnWorkoutRegimenIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FitnessUserId", DbType="Int NOT NULL")]
+		public int FitnessUserId
+		{
+			get
+			{
+				return this._FitnessUserId;
+			}
+			set
+			{
+				if ((this._FitnessUserId != value))
+				{
+					if (this._FitnessUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFitnessUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._FitnessUserId = value;
+					this.SendPropertyChanged("FitnessUserId");
+					this.OnFitnessUserIdChanged();
 				}
 			}
 		}
@@ -512,26 +712,6 @@ namespace FitnessTracker.Models
 					this._ExerciseTypeId = value;
 					this.SendPropertyChanged("ExerciseTypeId");
 					this.OnExerciseTypeIdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Person", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Person
-		{
-			get
-			{
-				return this._Person;
-			}
-			set
-			{
-				if ((this._Person != value))
-				{
-					this.OnPersonChanging(value);
-					this.SendPropertyChanging();
-					this._Person = value;
-					this.SendPropertyChanged("Person");
-					this.OnPersonChanged();
 				}
 			}
 		}
@@ -719,6 +899,40 @@ namespace FitnessTracker.Models
 						this._ExerciseTypeId = default(int);
 					}
 					this.SendPropertyChanged("ExerciseType");
+				}
+			}
+		}
+		
+		[Association(Name="FitnessUser_WorkoutRegimen", Storage="_FitnessUser", ThisKey="FitnessUserId", OtherKey="FitnessUserId", IsForeignKey=true)]
+		public FitnessUser FitnessUser
+		{
+			get
+			{
+				return this._FitnessUser.Entity;
+			}
+			set
+			{
+				FitnessUser previousValue = this._FitnessUser.Entity;
+				if (((previousValue != value) 
+							|| (this._FitnessUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FitnessUser.Entity = null;
+						previousValue.WorkoutRegimens.Remove(this);
+					}
+					this._FitnessUser.Entity = value;
+					if ((value != null))
+					{
+						value.WorkoutRegimens.Add(this);
+						this._FitnessUserId = value.FitnessUserId;
+					}
+					else
+					{
+						this._FitnessUserId = default(int);
+					}
+					this.SendPropertyChanged("FitnessUser");
 				}
 			}
 		}

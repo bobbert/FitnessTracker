@@ -67,6 +67,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ExerciseTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WorkoutRegimenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -77,10 +78,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FitnessTracker.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\FitnessUserIdentity.cs" />
+    <Compile Include="Models\FitnessUserRepository.cs" />
     <Compile Include="Models\IExerciseTypeRepository.cs" />
+    <Compile Include="Models\IFitnessUserRepository.cs" />
+    <Compile Include="Models\IWorkoutRegimenRepository.cs" />
+    <Compile Include="Models\WorkoutRegimenFormViewModel.cs" />
+    <Compile Include="Models\WorkoutRegimenRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ASPNETDB.MDF">
+    </Content>
+    <Content Include="App_Data\ASPNETDB_log.ldf">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
     <Content Include="App_Data\FitnessTracker.mdf">
     </Content>
     <Content Include="App_Data\FitnessTracker_log.ldf">
@@ -92,6 +104,12 @@
     <Content Include="Views\ExerciseType\Details.aspx" />
     <Content Include="Views\ExerciseType\Edit.aspx" />
     <Content Include="Views\ExerciseType\Index.aspx" />
+    <Content Include="Views\ExerciseType\NotFound.aspx" />
+    <Content Include="Views\WorkoutRegimen\Create.aspx" />
+    <Content Include="Views\WorkoutRegimen\Delete.aspx" />
+    <Content Include="Views\WorkoutRegimen\Details.aspx" />
+    <Content Include="Views\WorkoutRegimen\Edit.aspx" />
+    <Content Include="Views\WorkoutRegimen\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />

@@ -33,11 +33,14 @@ namespace FitnessTracker.Controllers
         // GET: /ExerciseType/Details/5
         public ActionResult Details(int id)
         {
-            return View(exerciseTypeRepository.GetExerciseType(id));
+            ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
+            if (exerciseType == null) return View("NotFound");
+            return View(exerciseType);
         }
 
         //
         // GET: /ExerciseType/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -45,14 +48,14 @@ namespace FitnessTracker.Controllers
 
         //
         // POST: /ExerciseType/Create
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Exclude="ExerciseTypeId")] ExerciseType exerciseTypeToAdd)
         {
             try
             {
                 exerciseTypeRepository.Add(exerciseTypeToAdd);
                 exerciseTypeRepository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id=exerciseTypeToAdd.ExerciseTypeId });
             }
             catch
             {
@@ -62,23 +65,26 @@ namespace FitnessTracker.Controllers
         
         //
         // GET: /ExerciseType/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
-            return View(exerciseTypeRepository.GetExerciseType(id));
+            ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
+            if (exerciseType == null) return View("NotFound");
+            return View(exerciseType);
         }
 
         //
         // POST: /ExerciseType/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, ExerciseType exerciseTypeToEdit)
+        [HttpPost, Authorize(Roles = "admin")]
+        public ActionResult Edit(int id, FormCollection formValues)
         {
+            ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
             try
             {
-                ExerciseType exerciseTypePreviouslySaved = exerciseTypeRepository.GetExerciseType(id);
-                UpdateModel(exerciseTypePreviouslySaved);
+                UpdateModel(exerciseType);
                 exerciseTypeRepository.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id=exerciseType.ExerciseTypeId });
             }
             catch
             {
@@ -88,14 +94,17 @@ namespace FitnessTracker.Controllers
 
         //
         // GET: /ExerciseType/Delete/5
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
-            return View(exerciseTypeRepository.GetExerciseType(id));
+            ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
+            if (exerciseType == null) return View("NotFound");
+            return View(exerciseType);
         }
 
         //
         // POST: /ExerciseType/Delete/5
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "admin")]
         public ActionResult Delete(int id, ExerciseType exerciseTypeToDelete)
         {
             try
