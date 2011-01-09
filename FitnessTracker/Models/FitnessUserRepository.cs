@@ -8,7 +8,7 @@ namespace FitnessTracker.Models
 {
     public class FitnessUserRepository : IFitnessUserRepository 
     {
-        public FitnessTrackerDataContext DataContext { get; private set; }
+        public FitnessTrackerDataContext DataContext { get; protected set; }
 
         // Constructors
 

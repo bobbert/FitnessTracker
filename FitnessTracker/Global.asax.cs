@@ -18,20 +18,20 @@ namespace FitnessTracker
 
             routes.MapRoute(
                 "Workout", 
-                "WorkoutRegimens/{WorkoutRegimenId}/Workouts/{action}/{id}",
+                "WorkoutRegimen/Details/{workoutRegimenId}/Workout/{action}/{id}",
                 new { controller = "Workout", action = "Index",  id = UrlParameter.Optional },
-                new { WorkoutRegimenId = @"\d+" }
+                new { workoutRegimenId = @"\d+" }
             );
 
             routes.MapRoute(
                 "WorkoutRegimen",
-                "WorkoutRegimens/{action}/{id}",
+                "WorkoutRegimen/{action}/{id}",
                 new { controller = "WorkoutRegimen", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
                 "ExerciseType", 
-                "ExerciseTypes/{action}/{id}", 
+                "ExerciseType/{action}/{id}", 
                 new { controller = "ExerciseType", action = "Index", id = UrlParameter.Optional }
             );
 

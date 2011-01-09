@@ -67,6 +67,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ExerciseTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Controllers\WorkoutRegimenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -83,8 +84,11 @@
     <Compile Include="Models\IExerciseTypeRepository.cs" />
     <Compile Include="Models\IFitnessUserRepository.cs" />
     <Compile Include="Models\IWorkoutRegimenRepository.cs" />
+    <Compile Include="Models\IWorkoutRepository.cs" />
+    <Compile Include="Models\WorkoutFormViewModel.cs" />
     <Compile Include="Models\WorkoutRegimenFormViewModel.cs" />
     <Compile Include="Models\WorkoutRegimenRepository.cs" />
+    <Compile Include="Models\WorkoutRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +114,11 @@
     <Content Include="Views\WorkoutRegimen\Details.aspx" />
     <Content Include="Views\WorkoutRegimen\Edit.aspx" />
     <Content Include="Views\WorkoutRegimen\Index.aspx" />
+    <Content Include="Views\Workout\Create.aspx" />
+    <Content Include="Views\Workout\Delete.aspx" />
+    <Content Include="Views\Workout\Details.aspx" />
+    <Content Include="Views\Workout\Edit.aspx" />
+    <Content Include="Views\Workout\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />

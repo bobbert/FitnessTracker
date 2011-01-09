@@ -3,10 +3,8 @@ using System.Linq;
 
 namespace FitnessTracker.Models
 {
-    public interface IWorkoutRegimenRepository
+    public interface IWorkoutRegimenRepository : IFitnessUserRepository
     {
-        FitnessTrackerDataContext DataContext { get; }
-
         IQueryable<WorkoutRegimen> FindAllWorkoutRegimensByUser(FitnessUser fitnessUser);
         IQueryable<WorkoutRegimen> FindAllCurrentWorkoutRegimensByDate(FitnessUser fitnessUser, DateTime dateTime);
         IQueryable<WorkoutRegimen> FindAllFinishedWorkoutRegimens(FitnessUser fitnessUser, DateTime dateTime);
@@ -16,6 +14,5 @@ namespace FitnessTracker.Models
 
         void Add(FitnessUser fitnessUser, WorkoutRegimen exerciseType);
         void Delete(FitnessUser fitnessUser, WorkoutRegimen exerciseType);
-        void Save();
     }
 }

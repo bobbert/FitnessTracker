@@ -6,10 +6,8 @@ using System.Data;
 
 namespace FitnessTracker.Models
 {
-    public class WorkoutRegimenRepository : IWorkoutRegimenRepository 
+    public class WorkoutRegimenRepository : FitnessUserRepository, IWorkoutRegimenRepository 
     {
-        public FitnessTrackerDataContext DataContext { get; private set; }
-
         // Constructors
 
         public WorkoutRegimenRepository() : this(new FitnessTrackerDataContext()) { }
@@ -62,6 +60,13 @@ namespace FitnessTracker.Models
             ).ToList().Count() > 0);
         }
 
+        public Workout CreateWorkout(WorkoutRegimen workoutRegimen)
+        {
+            Workout workout = new Workout();
+            workout.WorkoutRegimen = workoutRegimen;
+            return workout;
+        }
+
         public void Add(FitnessUser fitnessUser, WorkoutRegimen workoutRegimen)
         {
             fitnessUser.WorkoutRegimens.Add(workoutRegimen);
@@ -76,14 +81,5 @@ namespace FitnessTracker.Models
                 );
             DataContext.WorkoutRegimens.DeleteOnSubmit(workoutRegimen);
         }
-
-        //
-        // Persistence 
-
-        public void Save()
-        {
-            DataContext.SubmitChanges();
-        }
-
     }
 }
