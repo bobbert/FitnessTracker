@@ -30,18 +30,18 @@ namespace FitnessTracker.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertExerciseType(ExerciseType instance);
-    partial void UpdateExerciseType(ExerciseType instance);
-    partial void DeleteExerciseType(ExerciseType instance);
-    partial void InsertWorkout(Workout instance);
-    partial void UpdateWorkout(Workout instance);
-    partial void DeleteWorkout(Workout instance);
     partial void InsertFitnessUser(FitnessUser instance);
     partial void UpdateFitnessUser(FitnessUser instance);
     partial void DeleteFitnessUser(FitnessUser instance);
     partial void InsertWorkoutRegimen(WorkoutRegimen instance);
     partial void UpdateWorkoutRegimen(WorkoutRegimen instance);
     partial void DeleteWorkoutRegimen(WorkoutRegimen instance);
+    partial void InsertWorkout(Workout instance);
+    partial void UpdateWorkout(Workout instance);
+    partial void DeleteWorkout(Workout instance);
+    partial void InsertExerciseType(ExerciseType instance);
+    partial void UpdateExerciseType(ExerciseType instance);
+    partial void DeleteExerciseType(ExerciseType instance);
     #endregion
 		
 		public FitnessTrackerDataContext() : 
@@ -74,22 +74,6 @@ namespace FitnessTracker.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<ExerciseType> ExerciseTypes
-		{
-			get
-			{
-				return this.GetTable<ExerciseType>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Workout> Workouts
-		{
-			get
-			{
-				return this.GetTable<Workout>();
-			}
-		}
-		
 		public System.Data.Linq.Table<FitnessUser> FitnessUsers
 		{
 			get
@@ -105,317 +89,20 @@ namespace FitnessTracker.Models
 				return this.GetTable<WorkoutRegimen>();
 			}
 		}
-	}
-	
-	[Table(Name="dbo.ExerciseTypes")]
-	public partial class ExerciseType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ExerciseTypeId;
-		
-		private string _Name;
-		
-		private EntitySet<WorkoutRegimen> _WorkoutRegimens;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnExerciseTypeIdChanging(int value);
-    partial void OnExerciseTypeIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public ExerciseType()
-		{
-			this._WorkoutRegimens = new EntitySet<WorkoutRegimen>(new Action<WorkoutRegimen>(this.attach_WorkoutRegimens), new Action<WorkoutRegimen>(this.detach_WorkoutRegimens));
-			OnCreated();
-		}
-		
-		[Column(Storage="_ExerciseTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ExerciseTypeId
+		public System.Data.Linq.Table<Workout> Workouts
 		{
 			get
 			{
-				return this._ExerciseTypeId;
-			}
-			set
-			{
-				if ((this._ExerciseTypeId != value))
-				{
-					this.OnExerciseTypeIdChanging(value);
-					this.SendPropertyChanging();
-					this._ExerciseTypeId = value;
-					this.SendPropertyChanged("ExerciseTypeId");
-					this.OnExerciseTypeIdChanged();
-				}
+				return this.GetTable<Workout>();
 			}
 		}
 		
-		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
+		public System.Data.Linq.Table<ExerciseType> ExerciseTypes
 		{
 			get
 			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[Association(Name="ExerciseType_WorkoutRegimen", Storage="_WorkoutRegimens", ThisKey="ExerciseTypeId", OtherKey="ExerciseTypeId")]
-		public EntitySet<WorkoutRegimen> WorkoutRegimens
-		{
-			get
-			{
-				return this._WorkoutRegimens;
-			}
-			set
-			{
-				this._WorkoutRegimens.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_WorkoutRegimens(WorkoutRegimen entity)
-		{
-			this.SendPropertyChanging();
-			entity.ExerciseType = this;
-		}
-		
-		private void detach_WorkoutRegimens(WorkoutRegimen entity)
-		{
-			this.SendPropertyChanging();
-			entity.ExerciseType = null;
-		}
-	}
-	
-	[Table(Name="dbo.Workouts")]
-	public partial class Workout : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _WorkoutId;
-		
-		private int _WorkoutRegimenId;
-		
-		private System.DateTime _Date;
-		
-		private double _Pace;
-		
-		private int _Duration;
-		
-		private EntityRef<WorkoutRegimen> _WorkoutRegimen;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnWorkoutIdChanging(int value);
-    partial void OnWorkoutIdChanged();
-    partial void OnWorkoutRegimenIdChanging(int value);
-    partial void OnWorkoutRegimenIdChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnPaceChanging(double value);
-    partial void OnPaceChanged();
-    partial void OnDurationChanging(int value);
-    partial void OnDurationChanged();
-    #endregion
-		
-		public Workout()
-		{
-			this._WorkoutRegimen = default(EntityRef<WorkoutRegimen>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_WorkoutId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int WorkoutId
-		{
-			get
-			{
-				return this._WorkoutId;
-			}
-			set
-			{
-				if ((this._WorkoutId != value))
-				{
-					this.OnWorkoutIdChanging(value);
-					this.SendPropertyChanging();
-					this._WorkoutId = value;
-					this.SendPropertyChanged("WorkoutId");
-					this.OnWorkoutIdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_WorkoutRegimenId", DbType="Int NOT NULL")]
-		public int WorkoutRegimenId
-		{
-			get
-			{
-				return this._WorkoutRegimenId;
-			}
-			set
-			{
-				if ((this._WorkoutRegimenId != value))
-				{
-					if (this._WorkoutRegimen.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnWorkoutRegimenIdChanging(value);
-					this.SendPropertyChanging();
-					this._WorkoutRegimenId = value;
-					this.SendPropertyChanged("WorkoutRegimenId");
-					this.OnWorkoutRegimenIdChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Pace", DbType="Float NOT NULL")]
-		public double Pace
-		{
-			get
-			{
-				return this._Pace;
-			}
-			set
-			{
-				if ((this._Pace != value))
-				{
-					this.OnPaceChanging(value);
-					this.SendPropertyChanging();
-					this._Pace = value;
-					this.SendPropertyChanged("Pace");
-					this.OnPaceChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Duration", DbType="Int NOT NULL")]
-		public int Duration
-		{
-			get
-			{
-				return this._Duration;
-			}
-			set
-			{
-				if ((this._Duration != value))
-				{
-					this.OnDurationChanging(value);
-					this.SendPropertyChanging();
-					this._Duration = value;
-					this.SendPropertyChanged("Duration");
-					this.OnDurationChanged();
-				}
-			}
-		}
-		
-		[Association(Name="WorkoutRegimen_Workout", Storage="_WorkoutRegimen", ThisKey="WorkoutRegimenId", OtherKey="WorkoutRegimenId", IsForeignKey=true)]
-		public WorkoutRegimen WorkoutRegimen
-		{
-			get
-			{
-				return this._WorkoutRegimen.Entity;
-			}
-			set
-			{
-				WorkoutRegimen previousValue = this._WorkoutRegimen.Entity;
-				if (((previousValue != value) 
-							|| (this._WorkoutRegimen.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._WorkoutRegimen.Entity = null;
-						previousValue.Workouts.Remove(this);
-					}
-					this._WorkoutRegimen.Entity = value;
-					if ((value != null))
-					{
-						value.Workouts.Add(this);
-						this._WorkoutRegimenId = value.WorkoutRegimenId;
-					}
-					else
-					{
-						this._WorkoutRegimenId = default(int);
-					}
-					this.SendPropertyChanged("WorkoutRegimen");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<ExerciseType>();
 			}
 		}
 	}
@@ -600,19 +287,19 @@ namespace FitnessTracker.Models
 		
 		private int _DaysPerWeek;
 		
-		private double _StartingPace;
+		private double _StartingNumMiles;
 		
-		private System.Nullable<double> _FinishingPace;
+		private System.Nullable<double> _FinishingNumMiles;
 		
-		private int _StartingDuration;
+		private int _StartingTotalSeconds;
 		
-		private System.Nullable<int> _FinishingDuration;
+		private System.Nullable<int> _FinishingTotalSeconds;
 		
 		private EntitySet<Workout> _Workouts;
 		
-		private EntityRef<ExerciseType> _ExerciseType;
-		
 		private EntityRef<FitnessUser> _FitnessUser;
+		
+		private EntityRef<ExerciseType> _ExerciseType;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -630,21 +317,21 @@ namespace FitnessTracker.Models
     partial void OnNumWeeksChanged();
     partial void OnDaysPerWeekChanging(int value);
     partial void OnDaysPerWeekChanged();
-    partial void OnStartingPaceChanging(double value);
-    partial void OnStartingPaceChanged();
-    partial void OnFinishingPaceChanging(System.Nullable<double> value);
-    partial void OnFinishingPaceChanged();
-    partial void OnStartingDurationChanging(int value);
-    partial void OnStartingDurationChanged();
-    partial void OnFinishingDurationChanging(System.Nullable<int> value);
-    partial void OnFinishingDurationChanged();
+    partial void OnStartingNumMilesChanging(double value);
+    partial void OnStartingNumMilesChanged();
+    partial void OnFinishingNumMilesChanging(System.Nullable<double> value);
+    partial void OnFinishingNumMilesChanged();
+    partial void OnStartingTotalSecondsChanging(int value);
+    partial void OnStartingTotalSecondsChanged();
+    partial void OnFinishingTotalSecondsChanging(System.Nullable<int> value);
+    partial void OnFinishingTotalSecondsChanged();
     #endregion
 		
 		public WorkoutRegimen()
 		{
 			this._Workouts = new EntitySet<Workout>(new Action<Workout>(this.attach_Workouts), new Action<Workout>(this.detach_Workouts));
-			this._ExerciseType = default(EntityRef<ExerciseType>);
 			this._FitnessUser = default(EntityRef<FitnessUser>);
+			this._ExerciseType = default(EntityRef<ExerciseType>);
 			OnCreated();
 		}
 		
@@ -776,82 +463,82 @@ namespace FitnessTracker.Models
 			}
 		}
 		
-		[Column(Storage="_StartingPace", DbType="Float NOT NULL")]
-		public double StartingPace
+		[Column(Storage="_StartingNumMiles", DbType="Float NOT NULL")]
+		public double StartingNumMiles
 		{
 			get
 			{
-				return this._StartingPace;
+				return this._StartingNumMiles;
 			}
 			set
 			{
-				if ((this._StartingPace != value))
+				if ((this._StartingNumMiles != value))
 				{
-					this.OnStartingPaceChanging(value);
+					this.OnStartingNumMilesChanging(value);
 					this.SendPropertyChanging();
-					this._StartingPace = value;
-					this.SendPropertyChanged("StartingPace");
-					this.OnStartingPaceChanged();
+					this._StartingNumMiles = value;
+					this.SendPropertyChanged("StartingNumMiles");
+					this.OnStartingNumMilesChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_FinishingPace", DbType="Float")]
-		public System.Nullable<double> FinishingPace
+		[Column(Storage="_FinishingNumMiles", DbType="Float")]
+		public System.Nullable<double> FinishingNumMiles
 		{
 			get
 			{
-				return this._FinishingPace;
+				return this._FinishingNumMiles;
 			}
 			set
 			{
-				if ((this._FinishingPace != value))
+				if ((this._FinishingNumMiles != value))
 				{
-					this.OnFinishingPaceChanging(value);
+					this.OnFinishingNumMilesChanging(value);
 					this.SendPropertyChanging();
-					this._FinishingPace = value;
-					this.SendPropertyChanged("FinishingPace");
-					this.OnFinishingPaceChanged();
+					this._FinishingNumMiles = value;
+					this.SendPropertyChanged("FinishingNumMiles");
+					this.OnFinishingNumMilesChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_StartingDuration", DbType="Int NOT NULL")]
-		public int StartingDuration
+		[Column(Storage="_StartingTotalSeconds", DbType="Int NOT NULL")]
+		public int StartingTotalSeconds
 		{
 			get
 			{
-				return this._StartingDuration;
+				return this._StartingTotalSeconds;
 			}
 			set
 			{
-				if ((this._StartingDuration != value))
+				if ((this._StartingTotalSeconds != value))
 				{
-					this.OnStartingDurationChanging(value);
+					this.OnStartingTotalSecondsChanging(value);
 					this.SendPropertyChanging();
-					this._StartingDuration = value;
-					this.SendPropertyChanged("StartingDuration");
-					this.OnStartingDurationChanged();
+					this._StartingTotalSeconds = value;
+					this.SendPropertyChanged("StartingTotalSeconds");
+					this.OnStartingTotalSecondsChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_FinishingDuration", DbType="Int")]
-		public System.Nullable<int> FinishingDuration
+		[Column(Storage="_FinishingTotalSeconds", DbType="Int")]
+		public System.Nullable<int> FinishingTotalSeconds
 		{
 			get
 			{
-				return this._FinishingDuration;
+				return this._FinishingTotalSeconds;
 			}
 			set
 			{
-				if ((this._FinishingDuration != value))
+				if ((this._FinishingTotalSeconds != value))
 				{
-					this.OnFinishingDurationChanging(value);
+					this.OnFinishingTotalSecondsChanging(value);
 					this.SendPropertyChanging();
-					this._FinishingDuration = value;
-					this.SendPropertyChanged("FinishingDuration");
-					this.OnFinishingDurationChanged();
+					this._FinishingTotalSeconds = value;
+					this.SendPropertyChanged("FinishingTotalSeconds");
+					this.OnFinishingTotalSecondsChanged();
 				}
 			}
 		}
@@ -866,40 +553,6 @@ namespace FitnessTracker.Models
 			set
 			{
 				this._Workouts.Assign(value);
-			}
-		}
-		
-		[Association(Name="ExerciseType_WorkoutRegimen", Storage="_ExerciseType", ThisKey="ExerciseTypeId", OtherKey="ExerciseTypeId", IsForeignKey=true)]
-		public ExerciseType ExerciseType
-		{
-			get
-			{
-				return this._ExerciseType.Entity;
-			}
-			set
-			{
-				ExerciseType previousValue = this._ExerciseType.Entity;
-				if (((previousValue != value) 
-							|| (this._ExerciseType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._ExerciseType.Entity = null;
-						previousValue.WorkoutRegimens.Remove(this);
-					}
-					this._ExerciseType.Entity = value;
-					if ((value != null))
-					{
-						value.WorkoutRegimens.Add(this);
-						this._ExerciseTypeId = value.ExerciseTypeId;
-					}
-					else
-					{
-						this._ExerciseTypeId = default(int);
-					}
-					this.SendPropertyChanged("ExerciseType");
-				}
 			}
 		}
 		
@@ -937,6 +590,40 @@ namespace FitnessTracker.Models
 			}
 		}
 		
+		[Association(Name="ExerciseType_WorkoutRegimen", Storage="_ExerciseType", ThisKey="ExerciseTypeId", OtherKey="ExerciseTypeId", IsForeignKey=true)]
+		public ExerciseType ExerciseType
+		{
+			get
+			{
+				return this._ExerciseType.Entity;
+			}
+			set
+			{
+				ExerciseType previousValue = this._ExerciseType.Entity;
+				if (((previousValue != value) 
+							|| (this._ExerciseType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ExerciseType.Entity = null;
+						previousValue.WorkoutRegimens.Remove(this);
+					}
+					this._ExerciseType.Entity = value;
+					if ((value != null))
+					{
+						value.WorkoutRegimens.Add(this);
+						this._ExerciseTypeId = value.ExerciseTypeId;
+					}
+					else
+					{
+						this._ExerciseTypeId = default(int);
+					}
+					this.SendPropertyChanged("ExerciseType");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -967,6 +654,391 @@ namespace FitnessTracker.Models
 		{
 			this.SendPropertyChanging();
 			entity.WorkoutRegimen = null;
+		}
+	}
+	
+	[Table(Name="dbo.Workouts")]
+	public partial class Workout : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _WorkoutId;
+		
+		private int _WorkoutRegimenId;
+		
+		private System.DateTime _StartingTime;
+		
+		private double _NumMiles;
+		
+		private int _TotalSeconds;
+		
+		private EntityRef<WorkoutRegimen> _WorkoutRegimen;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnWorkoutIdChanging(int value);
+    partial void OnWorkoutIdChanged();
+    partial void OnWorkoutRegimenIdChanging(int value);
+    partial void OnWorkoutRegimenIdChanged();
+    partial void OnStartingTimeChanging(System.DateTime value);
+    partial void OnStartingTimeChanged();
+    partial void OnNumMilesChanging(double value);
+    partial void OnNumMilesChanged();
+    partial void OnTotalSecondsChanging(int value);
+    partial void OnTotalSecondsChanged();
+    #endregion
+		
+		public Workout()
+		{
+			this._WorkoutRegimen = default(EntityRef<WorkoutRegimen>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_WorkoutId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int WorkoutId
+		{
+			get
+			{
+				return this._WorkoutId;
+			}
+			set
+			{
+				if ((this._WorkoutId != value))
+				{
+					this.OnWorkoutIdChanging(value);
+					this.SendPropertyChanging();
+					this._WorkoutId = value;
+					this.SendPropertyChanged("WorkoutId");
+					this.OnWorkoutIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_WorkoutRegimenId", DbType="Int NOT NULL")]
+		public int WorkoutRegimenId
+		{
+			get
+			{
+				return this._WorkoutRegimenId;
+			}
+			set
+			{
+				if ((this._WorkoutRegimenId != value))
+				{
+					if (this._WorkoutRegimen.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnWorkoutRegimenIdChanging(value);
+					this.SendPropertyChanging();
+					this._WorkoutRegimenId = value;
+					this.SendPropertyChanged("WorkoutRegimenId");
+					this.OnWorkoutRegimenIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_StartingTime", DbType="DateTime NOT NULL")]
+		public System.DateTime StartingTime
+		{
+			get
+			{
+				return this._StartingTime;
+			}
+			set
+			{
+				if ((this._StartingTime != value))
+				{
+					this.OnStartingTimeChanging(value);
+					this.SendPropertyChanging();
+					this._StartingTime = value;
+					this.SendPropertyChanged("StartingTime");
+					this.OnStartingTimeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_NumMiles", DbType="Float NOT NULL")]
+		public double NumMiles
+		{
+			get
+			{
+				return this._NumMiles;
+			}
+			set
+			{
+				if ((this._NumMiles != value))
+				{
+					this.OnNumMilesChanging(value);
+					this.SendPropertyChanging();
+					this._NumMiles = value;
+					this.SendPropertyChanged("NumMiles");
+					this.OnNumMilesChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_TotalSeconds", DbType="Int NOT NULL")]
+		public int TotalSeconds
+		{
+			get
+			{
+				return this._TotalSeconds;
+			}
+			set
+			{
+				if ((this._TotalSeconds != value))
+				{
+					this.OnTotalSecondsChanging(value);
+					this.SendPropertyChanging();
+					this._TotalSeconds = value;
+					this.SendPropertyChanged("TotalSeconds");
+					this.OnTotalSecondsChanged();
+				}
+			}
+		}
+		
+		[Association(Name="WorkoutRegimen_Workout", Storage="_WorkoutRegimen", ThisKey="WorkoutRegimenId", OtherKey="WorkoutRegimenId", IsForeignKey=true)]
+		public WorkoutRegimen WorkoutRegimen
+		{
+			get
+			{
+				return this._WorkoutRegimen.Entity;
+			}
+			set
+			{
+				WorkoutRegimen previousValue = this._WorkoutRegimen.Entity;
+				if (((previousValue != value) 
+							|| (this._WorkoutRegimen.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._WorkoutRegimen.Entity = null;
+						previousValue.Workouts.Remove(this);
+					}
+					this._WorkoutRegimen.Entity = value;
+					if ((value != null))
+					{
+						value.Workouts.Add(this);
+						this._WorkoutRegimenId = value.WorkoutRegimenId;
+					}
+					else
+					{
+						this._WorkoutRegimenId = default(int);
+					}
+					this.SendPropertyChanged("WorkoutRegimen");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.ExerciseTypes")]
+	public partial class ExerciseType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ExerciseTypeId;
+		
+		private string _Name;
+		
+		private System.Nullable<bool> _IsDistanceUsed;
+		
+		private System.Nullable<int> _MinSecondsPerMile;
+		
+		private System.Nullable<int> _MaxSecondsPerMile;
+		
+		private EntitySet<WorkoutRegimen> _WorkoutRegimens;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnExerciseTypeIdChanging(int value);
+    partial void OnExerciseTypeIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnIsDistanceUsedChanging(System.Nullable<bool> value);
+    partial void OnIsDistanceUsedChanged();
+    partial void OnMinSecondsPerMileChanging(System.Nullable<int> value);
+    partial void OnMinSecondsPerMileChanged();
+    partial void OnMaxSecondsPerMileChanging(System.Nullable<int> value);
+    partial void OnMaxSecondsPerMileChanged();
+    #endregion
+		
+		public ExerciseType()
+		{
+			this._WorkoutRegimens = new EntitySet<WorkoutRegimen>(new Action<WorkoutRegimen>(this.attach_WorkoutRegimens), new Action<WorkoutRegimen>(this.detach_WorkoutRegimens));
+			OnCreated();
+		}
+		
+		[Column(Storage="_ExerciseTypeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ExerciseTypeId
+		{
+			get
+			{
+				return this._ExerciseTypeId;
+			}
+			set
+			{
+				if ((this._ExerciseTypeId != value))
+				{
+					this.OnExerciseTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._ExerciseTypeId = value;
+					this.SendPropertyChanged("ExerciseTypeId");
+					this.OnExerciseTypeIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IsDistanceUsed", DbType="Bit")]
+		public System.Nullable<bool> IsDistanceUsed
+		{
+			get
+			{
+				return this._IsDistanceUsed;
+			}
+			set
+			{
+				if ((this._IsDistanceUsed != value))
+				{
+					this.OnIsDistanceUsedChanging(value);
+					this.SendPropertyChanging();
+					this._IsDistanceUsed = value;
+					this.SendPropertyChanged("IsDistanceUsed");
+					this.OnIsDistanceUsedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MinSecondsPerMile", DbType="Int")]
+		public System.Nullable<int> MinSecondsPerMile
+		{
+			get
+			{
+				return this._MinSecondsPerMile;
+			}
+			set
+			{
+				if ((this._MinSecondsPerMile != value))
+				{
+					this.OnMinSecondsPerMileChanging(value);
+					this.SendPropertyChanging();
+					this._MinSecondsPerMile = value;
+					this.SendPropertyChanged("MinSecondsPerMile");
+					this.OnMinSecondsPerMileChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MaxSecondsPerMile", DbType="Int")]
+		public System.Nullable<int> MaxSecondsPerMile
+		{
+			get
+			{
+				return this._MaxSecondsPerMile;
+			}
+			set
+			{
+				if ((this._MaxSecondsPerMile != value))
+				{
+					this.OnMaxSecondsPerMileChanging(value);
+					this.SendPropertyChanging();
+					this._MaxSecondsPerMile = value;
+					this.SendPropertyChanged("MaxSecondsPerMile");
+					this.OnMaxSecondsPerMileChanged();
+				}
+			}
+		}
+		
+		[Association(Name="ExerciseType_WorkoutRegimen", Storage="_WorkoutRegimens", ThisKey="ExerciseTypeId", OtherKey="ExerciseTypeId")]
+		public EntitySet<WorkoutRegimen> WorkoutRegimens
+		{
+			get
+			{
+				return this._WorkoutRegimens;
+			}
+			set
+			{
+				this._WorkoutRegimens.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_WorkoutRegimens(WorkoutRegimen entity)
+		{
+			this.SendPropertyChanging();
+			entity.ExerciseType = this;
+		}
+		
+		private void detach_WorkoutRegimens(WorkoutRegimen entity)
+		{
+			this.SendPropertyChanging();
+			entity.ExerciseType = null;
 		}
 	}
 }

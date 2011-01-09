@@ -8,13 +8,8 @@
 
     <h2>Details</h2>
 
-    <fieldset>
-        <legend>Fields</legend>
-        
-        <div class="display-label">Name</div>
-        <div class="display-field"><%= Html.Encode(Model.Name) %></div>
-        
-    </fieldset>
+    <% Html.RenderPartial("ExerciseTypeDisplay"); %>
+
     <p>
 
         <%= Html.ActionLink("Edit", "Edit", new { id=Model.ExerciseTypeId }) %> |

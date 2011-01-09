@@ -107,6 +107,8 @@
     <Content Include="Views\ExerciseType\Delete.aspx" />
     <Content Include="Views\ExerciseType\Details.aspx" />
     <Content Include="Views\ExerciseType\Edit.aspx" />
+    <Content Include="Views\ExerciseType\ExerciseTypeDisplay.ascx" />
+    <Content Include="Views\ExerciseType\ExerciseTypeForm.ascx" />
     <Content Include="Views\ExerciseType\Index.aspx" />
     <Content Include="Views\ExerciseType\NotFound.aspx" />
     <Content Include="Views\WorkoutRegimen\Create.aspx" />
@@ -114,12 +116,14 @@
     <Content Include="Views\WorkoutRegimen\Details.aspx" />
     <Content Include="Views\WorkoutRegimen\Edit.aspx" />
     <Content Include="Views\WorkoutRegimen\Index.aspx" />
+    <Content Include="Views\WorkoutRegimen\WorkoutRegimenDisplay.ascx" />
     <Content Include="Views\WorkoutRegimen\WorkoutRegimenForm.ascx" />
     <Content Include="Views\Workout\Create.aspx" />
     <Content Include="Views\Workout\Delete.aspx" />
     <Content Include="Views\Workout\Details.aspx" />
     <Content Include="Views\Workout\Edit.aspx" />
     <Content Include="Views\Workout\Index.aspx" />
+    <Content Include="Views\Workout\WorkoutDisplay.ascx" />
     <Content Include="Views\Workout\WorkoutForm.ascx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />

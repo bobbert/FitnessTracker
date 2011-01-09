@@ -9,8 +9,10 @@
     <h2>Delete</h2>
     
     <p>
-    Are you sure that you want to delete the entry for <%= Model.Name %>?
+    Are you sure that you want to delete this exercise type?
     </p>
+
+    <% Html.RenderPartial("ExerciseTypeDisplay"); %>
 
     <% using (Html.BeginForm(new { Id = Model.ExerciseTypeId }))
        { %>

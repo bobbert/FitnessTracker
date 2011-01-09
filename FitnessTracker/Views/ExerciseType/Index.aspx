@@ -12,10 +12,19 @@
         <tr>
             <th></th>
             <th>
-                ExerciseTypeId
+                Id
             </th>
             <th>
                 Name
+            </th>
+            <th>
+                Distance Used?
+            </th>
+            <th>
+                Min Seconds/Mile
+            </th>
+            <th>
+                Max Seconds/Mile
             </th>
         </tr>
 
@@ -32,6 +41,15 @@
             </td>
             <td>
                 <%= Html.Encode(item.Name) %>
+            </td>
+            <td>
+                <%= Html.Encode(item.IsDistanceUsed) %>
+            </td>
+            <td>
+                <%= Html.Encode(item.MinSecondsPerMile) %>
+            </td>
+            <td>
+                <%= Html.Encode(item.MaxSecondsPerMile) %>
             </td>
         </tr>
     

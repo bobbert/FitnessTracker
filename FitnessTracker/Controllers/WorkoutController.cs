@@ -36,7 +36,7 @@ namespace FitnessTracker.Controllers
                         from wr in workoutRepository.FindAllWorkoutsByUserAndRegimen(currentUser, parentRegimen).ToList()
                         select new WorkoutFormViewModel(wr, workoutRepository.DataContext)
                     );
-                ViewData["ParentRegimen"] = parentRegimen;  // render Workout Regimen Details based on this value
+                ViewData["workoutRegimenId"] = workoutRegimenId;  // render Workout Regimen Details based on this value
                 return View(workoutViewModels);
             }
             catch
@@ -70,7 +70,7 @@ namespace FitnessTracker.Controllers
         {
             Workout workout = new Workout()
             {
-                Date = DateTime.Today
+                StartingTime = DateTime.Today
             };
             return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
         }
@@ -94,7 +94,7 @@ namespace FitnessTracker.Controllers
             {
                 Workout workout = new Workout()
                 {
-                    Date = DateTime.Today
+                    StartingTime = DateTime.Today
                 };
                 return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
             }

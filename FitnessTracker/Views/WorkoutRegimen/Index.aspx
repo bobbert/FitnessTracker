@@ -12,28 +12,31 @@
         <tr>
             <th></th>
             <th>
+                Id
+            </th>
+            <th>
                 Exercise Type
             </th>
             <th>
-                StartDate
+                Starting Date
             </th>
             <th>
-                NumWeeks
+                # of Weeks
             </th>
             <th>
-                Days Per Week
+                Days per Week
             </th>
             <th>
-                Starting Pace
+                Starting # of Miles
             </th>
             <th>
-                Finishing Pace
+                Finishing # of Miles
             </th>
             <th>
-                Starting Duration
+                Starting Duration (seconds)
             </th>
             <th>
-                Finishing Duration
+                Finishing Duration (seconds)
             </th>
         </tr>
 
@@ -42,8 +45,11 @@
         <tr>
             <td>
                 <%= Html.ActionLink("Edit", "Edit", new { id=item.WorkoutRegimen.WorkoutRegimenId }) %> |
-                <%= Html.ActionLink("Details", "Index", "Workout", new { workoutRegimenId = item.WorkoutRegimen.WorkoutRegimenId }, null)%> |
+                <%= Html.ActionLink("Details", "Details", new { id=item.WorkoutRegimen.WorkoutRegimenId })%> |
                 <%= Html.ActionLink("Delete", "Delete", new { id=item.WorkoutRegimen.WorkoutRegimenId })%>
+            </td>
+            <td>
+                <%= Html.Encode(item.WorkoutRegimen.WorkoutRegimenId) %>
             </td>
             <td>
                 <%= Html.Encode(item.GetExerciseTypeName()) %>
@@ -58,16 +64,16 @@
                 <%= Html.Encode(item.WorkoutRegimen.DaysPerWeek) %>
             </td>
             <td>
-                <%= Html.Encode(String.Format("{0:F}", item.WorkoutRegimen.StartingPace)) %>
+                <%= Html.Encode(String.Format("{0:F}", item.WorkoutRegimen.StartingNumMiles)) %>
             </td>
             <td>
-                <%= Html.Encode(String.Format("{0:F}", item.WorkoutRegimen.FinishingPace)) %>
+                <%= Html.Encode(String.Format("{0:F}", item.WorkoutRegimen.FinishingNumMiles)) %>
             </td>
             <td>
-                <%= Html.Encode(item.WorkoutRegimen.StartingDuration) %>
+                <%= Html.Encode(item.WorkoutRegimen.StartingTotalSeconds) %>
             </td>
             <td>
-                <%= Html.Encode(item.WorkoutRegimen.FinishingDuration) %>
+                <%= Html.Encode(item.WorkoutRegimen.FinishingTotalSeconds) %>
             </td>
         </tr>
     

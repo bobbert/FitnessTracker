@@ -3,36 +3,36 @@
 <% using (Html.BeginForm()) {%>
     <%= Html.ValidationSummary(true) %>
     
-    <fieldset>
-        <legend>Fields</legend>
-        
-        <div class="editor-label">
-            <%= Html.LabelFor(model => model.Workout.Date) %>
-        </div>
-        <div class="editor-field">
-            <%= Html.TextBoxFor(model => model.Workout.Date, String.Format("{0:g}", Model.Workout.Date))%>
-            <%= Html.ValidationMessageFor(model => model.Workout.Date) %>
-        </div>
-        
-        <div class="editor-label">
-            <%= Html.LabelFor(model => model.Workout.Pace) %>
-        </div>
-        <div class="editor-field">
-            <%= Html.TextBoxFor(model => model.Workout.Pace, String.Format("{0:F}", Model.Workout.Pace))%>
-            <%= Html.ValidationMessageFor(model => model.Workout.Pace) %>
-        </div>
-        
-        <div class="editor-label">
-            <%= Html.LabelFor(model => model.Workout.Duration) %>
-        </div>
-        <div class="editor-field">
-            <%= Html.TextBoxFor(model => model.Workout.Duration) %>
-            <%= Html.ValidationMessageFor(model => model.Workout.Duration) %>
-        </div>
-        
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+        <fieldset>
+            <legend>Fields</legend>
+            
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Workout.StartingTime)%>
+            </div>
+            <div class="editor-field">
+                <%= Html.TextBoxFor(model => model.Workout.StartingTime, String.Format("{0:g}", Model.Workout.StartingTime))%>
+                <%= Html.ValidationMessageFor(model => model.Workout.StartingTime)%>
+            </div>
+            
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Workout.NumMiles) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.TextBoxFor(model => model.Workout.NumMiles, String.Format("{0:F}", Model.Workout.NumMiles)) %>
+                <%= Html.ValidationMessageFor(model => model.Workout.NumMiles) %>
+            </div>
+            
+            <div class="editor-label">
+                <%= Html.LabelFor(model => model.Workout.TotalSeconds) %>
+            </div>
+            <div class="editor-field">
+                <%= Html.TextBoxFor(model => model.Workout.TotalSeconds) %>
+                <%= Html.ValidationMessageFor(model => model.Workout.TotalSeconds) %>
+            </div>
+            
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
 
 <% } %>

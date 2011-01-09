@@ -6,25 +6,20 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Index</h2>
-
     <table>
         <tr>
             <th></th>
             <th>
-                WorkoutId
+                Id
             </th>
             <th>
-                WorkoutRegimenId
+                Starting Time
             </th>
             <th>
-                Date
+                # of Miles
             </th>
             <th>
-                Pace
-            </th>
-            <th>
-                Duration
+                Duration (seconds)
             </th>
         </tr>
 
@@ -32,24 +27,21 @@
     
         <tr>
             <td>
-                <%= Html.ActionLink("Edit", "Edit", new { id=item.Workout.WorkoutId }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id=item.Workout.WorkoutId })%> |
-                <%= Html.ActionLink("Delete", "Delete", new { id=item.Workout.WorkoutId })%>
+                <%= Html.ActionLink("Edit", "Edit", new { id = item.Workout.WorkoutId }) %> |
+                <%= Html.ActionLink("Details", "Details", new { id = item.Workout.WorkoutId })%> |
+                <%= Html.ActionLink("Delete", "Delete", new { id = item.Workout.WorkoutId })%>
             </td>
             <td>
-                <%= Html.Encode(item.Workout.WorkoutId) %>
+                <%= Html.Encode(item.Workout.WorkoutId)%>
             </td>
             <td>
-                <%= Html.Encode(item.Workout.WorkoutRegimenId) %>
+                <%= Html.Encode(String.Format("{0:g}", item.Workout.StartingTime))%>
             </td>
             <td>
-                <%= Html.Encode(String.Format("{0:g}", item.Workout.Date)) %>
+                <%= Html.Encode(String.Format("{0:F}", item.Workout.NumMiles))%>
             </td>
             <td>
-                <%= Html.Encode(String.Format("{0:F}", item.Workout.Pace)) %>
-            </td>
-            <td>
-                <%= Html.Encode(item.Workout.Duration) %>
+                <%= Html.Encode(item.Workout.TotalSeconds)%>
             </td>
         </tr>
     
@@ -59,6 +51,8 @@
 
     <p>
         <%= Html.ActionLink("Create New", "Create") %> |
+        <%= Html.ActionLink(String.Format("Back to Regimen #{0}", ViewData["workoutRegimenId"]), "Details", "WorkoutRegimen",
+                            new { id = ViewData["workoutRegimenId"] }, null)%> |
         <%= Html.ActionLink("Back to Workout Regimens", "Index", "WorkoutRegimen") %>
     </p>
 
