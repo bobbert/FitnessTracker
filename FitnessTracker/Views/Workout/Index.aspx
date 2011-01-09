@@ -58,7 +58,8 @@
     </table>
 
     <p>
-        <%= Html.ActionLink("Create New", "Create") %>
+        <%= Html.ActionLink("Create New", "Create") %> |
+        <%= Html.ActionLink("Back to Workout Regimens", "Index", "WorkoutRegimen") %>
     </p>
 
 </asp:Content>

@@ -36,6 +36,7 @@ namespace FitnessTracker.Controllers
                         from wr in workoutRepository.FindAllWorkoutsByUserAndRegimen(currentUser, parentRegimen).ToList()
                         select new WorkoutFormViewModel(wr, workoutRepository.DataContext)
                     );
+                ViewData["ParentRegimen"] = parentRegimen;  // render Workout Regimen Details based on this value
                 return View(workoutViewModels);
             }
             catch

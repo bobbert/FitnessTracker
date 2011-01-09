@@ -9,7 +9,7 @@
     <h2>Details</h2>
 
     <fieldset>
-        <legend>Fields</legend>
+        <legend>Workout Regimen</legend>
         
         <div class="display-label">Exercise Type</div>
         <div class="display-field"><%= Html.Encode(Model.GetExerciseTypeName()) %></div>
@@ -37,7 +37,7 @@
         
     </fieldset>
     <p>
-
+        <%= Html.ActionLink("View Workouts", "Index", "Workout", new { id=Model.WorkoutRegimen.WorkoutRegimenId }, null) %> |
         <%= Html.ActionLink("Edit", "Edit", new { id=Model.WorkoutRegimen.WorkoutRegimenId }) %> |
         <%= Html.ActionLink("Back to List", "Index") %>
     </p>

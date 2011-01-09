@@ -8,46 +8,11 @@
 
     <h2>Create</h2>
 
-    <% using (Html.BeginForm()) {%>
-        <%= Html.ValidationSummary(true) %>
+    <% Html.RenderPartial("WorkoutForm"); %>
 
-        <fieldset>
-            <legend>Fields</legend>
-            
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.Workout.Date) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.Workout.Date) %>
-                <%= Html.ValidationMessageFor(model => model.Workout.Date) %>
-            </div>
-            
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.Workout.Pace) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.Workout.Pace) %>
-                <%= Html.ValidationMessageFor(model => model.Workout.Pace) %>
-            </div>
-            
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.Workout.Duration) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.Workout.Duration) %>
-                <%= Html.ValidationMessageFor(model => model.Workout.Duration) %>
-            </div>
-            
-            <p>
-                <input type="submit" value="Create" />
-            </p>
-        </fieldset>
-
-    <% } %>
-
-    <div>
-        <%= Html.ActionLink("Back to List", "Index", new { workoutRegimenId = Model.Workout.WorkoutRegimenId } ) %>
-    </div>
+<div>
+    <%= Html.ActionLink("Back to List", "Index", new { workoutRegimenId = Model.Workout.WorkoutRegimenId })%>
+</div>
 
 </asp:Content>
 

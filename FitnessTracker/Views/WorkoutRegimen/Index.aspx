@@ -42,7 +42,7 @@
         <tr>
             <td>
                 <%= Html.ActionLink("Edit", "Edit", new { id=item.WorkoutRegimen.WorkoutRegimenId }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id=item.WorkoutRegimen.WorkoutRegimenId })%> |
+                <%= Html.ActionLink("Details", "Index", "Workout", new { workoutRegimenId = item.WorkoutRegimen.WorkoutRegimenId }, null)%> |
                 <%= Html.ActionLink("Delete", "Delete", new { id=item.WorkoutRegimen.WorkoutRegimenId })%>
             </td>
             <td>
