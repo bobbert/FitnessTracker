@@ -6,10 +6,8 @@ using System.Data;
 
 namespace FitnessTracker.Models
 {
-    public class ExerciseTypeRepository : IExerciseTypeRepository 
+    public class ExerciseTypeRepository : DistanceUnitRepository, IExerciseTypeRepository 
     {
-        public FitnessTrackerDataContext DataContext { get; private set; }
-
         // Constructors
 
         public ExerciseTypeRepository() : this(new FitnessTrackerDataContext()) { }
@@ -22,7 +20,7 @@ namespace FitnessTracker.Models
         //
         // Query Methods
 
-        public IQueryable<ExerciseType> FindByName(string name)
+        public IQueryable<ExerciseType> FindByExerciseTypeName(string name)
         {
             return DataContext.ExerciseTypes.Where(d => (d.Name == name));
         }
@@ -37,6 +35,18 @@ namespace FitnessTracker.Models
             return DataContext.ExerciseTypes.SingleOrDefault(d => d.ExerciseTypeId == id);
         }
 
+        public double? GetMinSecondsPerUnit(ExerciseType exerciseType, DistanceUnit distanceUnit)
+        {
+            if (exerciseType.HasDistanceData == null) return null;
+            return GetDistanceInUnits(distanceUnit, (double)exerciseType.MinSecondsPerMile.Value);
+        }
+
+        public double? GetMaxSecondsPerUnit(ExerciseType exerciseType, DistanceUnit distanceUnit)
+        {
+            if (exerciseType.HasDistanceData == null) return null;
+            return GetDistanceInUnits(distanceUnit, (double)exerciseType.MaxSecondsPerMile.Value);
+        }
+
         //
         // Insert/Delete Methods
 
@@ -48,14 +58,6 @@ namespace FitnessTracker.Models
         public void Delete(ExerciseType exerciseType)
         {
             DataContext.ExerciseTypes.DeleteOnSubmit(exerciseType);
-        }
-
-        //
-        // Persistence 
-
-        public void Save()
-        {
-            DataContext.SubmitChanges();
         }
 
     }

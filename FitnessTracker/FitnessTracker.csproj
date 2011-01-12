@@ -73,6 +73,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DistanceUnitsRepository.cs" />
+    <Compile Include="Models\ExerciseTypeFormViewModel.cs" />
     <Compile Include="Models\ExerciseTypeRepository.cs" />
     <Compile Include="Models\FitnessTracker.designer.cs">
       <AutoGen>True</AutoGen>
@@ -81,6 +83,8 @@
     </Compile>
     <Compile Include="Models\FitnessUserIdentity.cs" />
     <Compile Include="Models\FitnessUserRepository.cs" />
+    <Compile Include="Models\GenericFormViewModel.cs" />
+    <Compile Include="Models\IDistanceUnitsRepository.cs" />
     <Compile Include="Models\IExerciseTypeRepository.cs" />
     <Compile Include="Models\IFitnessUserRepository.cs" />
     <Compile Include="Models\IWorkoutRegimenRepository.cs" />

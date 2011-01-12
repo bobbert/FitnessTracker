@@ -42,6 +42,9 @@ namespace FitnessTracker.Models
     partial void InsertExerciseType(ExerciseType instance);
     partial void UpdateExerciseType(ExerciseType instance);
     partial void DeleteExerciseType(ExerciseType instance);
+    partial void InsertDistanceUnit(DistanceUnit instance);
+    partial void UpdateDistanceUnit(DistanceUnit instance);
+    partial void DeleteDistanceUnit(DistanceUnit instance);
     #endregion
 		
 		public FitnessTrackerDataContext() : 
@@ -103,6 +106,14 @@ namespace FitnessTracker.Models
 			get
 			{
 				return this.GetTable<ExerciseType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DistanceUnit> DistanceUnits
+		{
+			get
+			{
+				return this.GetTable<DistanceUnit>();
 			}
 		}
 	}
@@ -866,7 +877,7 @@ namespace FitnessTracker.Models
 		
 		private string _Name;
 		
-		private System.Nullable<bool> _IsDistanceUsed;
+		private System.Nullable<char> _HasDistanceData;
 		
 		private System.Nullable<int> _MinSecondsPerMile;
 		
@@ -882,8 +893,8 @@ namespace FitnessTracker.Models
     partial void OnExerciseTypeIdChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void OnIsDistanceUsedChanging(System.Nullable<bool> value);
-    partial void OnIsDistanceUsedChanged();
+    partial void OnHasDistanceDataChanging(System.Nullable<char> value);
+    partial void OnHasDistanceDataChanged();
     partial void OnMinSecondsPerMileChanging(System.Nullable<int> value);
     partial void OnMinSecondsPerMileChanged();
     partial void OnMaxSecondsPerMileChanging(System.Nullable<int> value);
@@ -936,22 +947,22 @@ namespace FitnessTracker.Models
 			}
 		}
 		
-		[Column(Storage="_IsDistanceUsed", DbType="Bit")]
-		public System.Nullable<bool> IsDistanceUsed
+		[Column(Storage="_HasDistanceData", DbType="Char(1)")]
+		public System.Nullable<char> HasDistanceData
 		{
 			get
 			{
-				return this._IsDistanceUsed;
+				return this._HasDistanceData;
 			}
 			set
 			{
-				if ((this._IsDistanceUsed != value))
+				if ((this._HasDistanceData != value))
 				{
-					this.OnIsDistanceUsedChanging(value);
+					this.OnHasDistanceDataChanging(value);
 					this.SendPropertyChanging();
-					this._IsDistanceUsed = value;
-					this.SendPropertyChanged("IsDistanceUsed");
-					this.OnIsDistanceUsedChanged();
+					this._HasDistanceData = value;
+					this.SendPropertyChanged("HasDistanceData");
+					this.OnHasDistanceDataChanged();
 				}
 			}
 		}
@@ -1039,6 +1050,116 @@ namespace FitnessTracker.Models
 		{
 			this.SendPropertyChanging();
 			entity.ExerciseType = null;
+		}
+	}
+	
+	[Table(Name="dbo.DistanceUnits")]
+	public partial class DistanceUnit : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DistanceUnitId;
+		
+		private string _Name;
+		
+		private double _UnitsPerMile;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDistanceUnitIdChanging(int value);
+    partial void OnDistanceUnitIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnUnitsPerMileChanging(double value);
+    partial void OnUnitsPerMileChanged();
+    #endregion
+		
+		public DistanceUnit()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_DistanceUnitId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DistanceUnitId
+		{
+			get
+			{
+				return this._DistanceUnitId;
+			}
+			set
+			{
+				if ((this._DistanceUnitId != value))
+				{
+					this.OnDistanceUnitIdChanging(value);
+					this.SendPropertyChanging();
+					this._DistanceUnitId = value;
+					this.SendPropertyChanged("DistanceUnitId");
+					this.OnDistanceUnitIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UnitsPerMile", DbType="Float NOT NULL")]
+		public double UnitsPerMile
+		{
+			get
+			{
+				return this._UnitsPerMile;
+			}
+			set
+			{
+				if ((this._UnitsPerMile != value))
+				{
+					this.OnUnitsPerMileChanging(value);
+					this.SendPropertyChanging();
+					this._UnitsPerMile = value;
+					this.SendPropertyChanged("UnitsPerMile");
+					this.OnUnitsPerMileChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

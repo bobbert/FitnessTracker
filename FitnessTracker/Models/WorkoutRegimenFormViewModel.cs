@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace FitnessTracker.Models
 {
-    public class WorkoutRegimenFormViewModel {
+    public class WorkoutRegimenFormViewModel : GenericFormViewModel {
 
         private ExerciseTypeRepository exerciseTypeRepository;
 
@@ -13,18 +13,21 @@ namespace FitnessTracker.Models
         public SelectList ExerciseTypeList { get; private set; }
         public SelectList DaysInWeekList { get; private set; }
         public SelectList NumWeeksList { get; private set; }
+        public SelectList DistanceUnitTypeList { get; private set; }
 
         // Constructors
 
-        public WorkoutRegimenFormViewModel() : this(new WorkoutRegimen(), new FitnessTrackerDataContext()) { }
+        public WorkoutRegimenFormViewModel() :  this(new WorkoutRegimen(), new FitnessTrackerDataContext()) { }
 
         public WorkoutRegimenFormViewModel(WorkoutRegimen workoutRegimen, FitnessTrackerDataContext dc) 
         {
+            dataContext = dc;
             WorkoutRegimen = workoutRegimen;
-            exerciseTypeRepository =  new ExerciseTypeRepository(dc);
-            ExerciseTypeList = CreateExerciseTypeSelectList(dc);
+            exerciseTypeRepository = new ExerciseTypeRepository(dataContext);
+            ExerciseTypeList = CreateExerciseTypeSelectList();
             DaysInWeekList = CreateDaysInWeekSelectList();
             NumWeeksList = CreateNumWeeksSelectList();
+            DistanceUnitTypeList = CreateDistanceUnitSelectList();
         }
 
         // Methods invoked within view
@@ -34,26 +37,24 @@ namespace FitnessTracker.Models
             return exerciseTypeRepository.GetExerciseType(WorkoutRegimen.ExerciseTypeId).Name;
         }
 
-        private SelectList CreateExerciseTypeSelectList(FitnessTrackerDataContext dc)
+        private SelectList CreateExerciseTypeSelectList()
         {
             return new SelectList(exerciseTypeRepository.FindAllExerciseTypes(), "ExerciseTypeId", "Name");
         }
 
+        private SelectList CreateDistanceUnitSelectList()
+        {
+            return new SelectList(exerciseTypeRepository.FindAllDistanceUnits(), "DistanceUnitId", "Name");
+        }
+
         private SelectList CreateDaysInWeekSelectList()
         {
-            List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
-            IQueryable query = (from i in numbers select i).AsQueryable();
-            return new SelectList(query, "DaysPerWeek");
+            return CreateNumericalSelectList(1, 7, 1, "DaysPerWeek");
         }
 
         private SelectList CreateNumWeeksSelectList()
         {
-            List<int> numbers = new List<int>();
-            for (int i = 1; i <= 52; i++) numbers.Add(i);
-            IQueryable query = (from i in numbers select i).AsQueryable();
-            return new SelectList(query, "NumWeeks");
-        }
-
-    
+            return CreateNumericalSelectList(1, 52, 1, "NumWeeks");
+        }    
     }
 }

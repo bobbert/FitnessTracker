@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace FitnessTracker.Models
 {
-    public class WorkoutFormViewModel {
+    public class WorkoutFormViewModel : GenericFormViewModel {
 
         private ExerciseTypeRepository exerciseTypeRepository;
 
@@ -17,8 +17,9 @@ namespace FitnessTracker.Models
 
         public WorkoutFormViewModel(Workout workout, FitnessTrackerDataContext dc) 
         {
+            dataContext = dc;
             Workout = workout;
-            exerciseTypeRepository =  new ExerciseTypeRepository(dc);
+            exerciseTypeRepository = new ExerciseTypeRepository(dataContext);
         }
 
         // Methods invoked within view

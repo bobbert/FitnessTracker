@@ -41,10 +41,17 @@
     <Type Name="ExerciseType">
       <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IsDistanceUsed" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="HasDistanceData" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
       <Column Name="MinSecondsPerMile" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MaxSecondsPerMile" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="ExerciseType_WorkoutRegimen" Member="WorkoutRegimens" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="WorkoutRegimen" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DistanceUnits" Member="DistanceUnits">
+    <Type Name="DistanceUnit">
+      <Column Name="DistanceUnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitsPerMile" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

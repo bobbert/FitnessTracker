@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<FitnessTracker.Models.ExerciseType>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<FitnessTracker.Models.ExerciseTypeFormViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Details
@@ -11,8 +11,9 @@
     <% Html.RenderPartial("ExerciseTypeDisplay"); %>
 
     <p>
-
-        <%= Html.ActionLink("Edit", "Edit", new { id=Model.ExerciseTypeId }) %> |
+        <% if (User.IsInRole("admin")) { %>
+            <%= Html.ActionLink("Edit", "Edit", new { id = Model.ExerciseType.ExerciseTypeId })%> |
+        <% } %>
         <%= Html.ActionLink("Back to List", "Index") %>
     </p>
 

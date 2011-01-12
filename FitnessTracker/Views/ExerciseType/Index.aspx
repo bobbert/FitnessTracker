@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<FitnessTracker.Models.ExerciseType>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<FitnessTracker.Models.ExerciseTypeFormViewModel>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Index
@@ -32,24 +32,28 @@
     
         <tr>
             <td>
-                <%= Html.ActionLink("Edit", "Edit", new { id=item.ExerciseTypeId }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseTypeId })%> |
-                <%= Html.ActionLink("Delete", "Delete", new { id=item.ExerciseTypeId })%>
+                <% if (User.IsInRole("admin")) { %>
+                    <%= Html.ActionLink("Edit", "Edit", new { id=item.ExerciseType.ExerciseTypeId }) %> |
+                    <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseType.ExerciseTypeId })%> |
+                    <%= Html.ActionLink("Delete", "Delete", new { id=item.ExerciseType.ExerciseTypeId })%>
+                <% } else { %>
+                    <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseType.ExerciseTypeId })%>
+                <% } %>
             </td>
             <td>
-                <%= Html.Encode(item.ExerciseTypeId) %>
+                <%= Html.Encode(item.ExerciseType.ExerciseTypeId) %>
             </td>
             <td>
-                <%= Html.Encode(item.Name) %>
+                <%= Html.Encode(item.ExerciseType.Name) %>
             </td>
             <td>
-                <%= Html.Encode(item.IsDistanceUsed) %>
+                <%= Html.Encode(item.ExerciseType.HasDistanceData) %>
             </td>
             <td>
-                <%= Html.Encode(item.MinSecondsPerMile) %>
+                <%= Html.Encode(item.ExerciseType.MinSecondsPerMile) %>
             </td>
             <td>
-                <%= Html.Encode(item.MaxSecondsPerMile) %>
+                <%= Html.Encode(item.ExerciseType.MaxSecondsPerMile) %>
             </td>
         </tr>
     
@@ -57,9 +61,11 @@
 
     </table>
 
+    <% if (User.IsInRole("admin")) { %>
     <p>
         <%= Html.ActionLink("Create New", "Create") %>
     </p>
+    <% } %>
 
 </asp:Content>
 
