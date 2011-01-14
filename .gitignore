@@ -1,9 +1,9 @@
 **/bin/
 **/obj/
-*/App_Data/*.mdf
-*/App_Data/*.ldf
-*/App_Data/*.MDF
-*/App_Data/*.LDF
+*/App_Data/ASPNETDB*.MDF
+*/App_Data/ASPNETDB*.LDF
+*/App_Data/aspnetdb*.mdf
+*/App_Data/aspnetdb*.ldf
 FitnessTracker.suo
 TestResults/
 
