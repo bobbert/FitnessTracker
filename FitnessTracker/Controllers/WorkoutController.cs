@@ -29,7 +29,7 @@ namespace FitnessTracker.Controllers
         public ActionResult Index(int workoutRegimenId)
         {
             FitnessUser fitnessUser = workoutRepository.FindByUserName(User.Identity.Name).SingleOrDefault();
-            return RedirectToAction("Details", "WorkoutRegimen");
+            return RedirectToAction("Details", "WorkoutRegimen", new { id = workoutRegimenId } );
         }
 
         //
@@ -59,6 +59,7 @@ namespace FitnessTracker.Controllers
             {
                 StartingTime = DateTime.Today
             };
+            workout.WorkoutRegimenId = workoutRegimenId;
             return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
         }
 

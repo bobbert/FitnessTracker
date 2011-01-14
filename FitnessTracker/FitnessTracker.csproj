@@ -128,7 +128,6 @@
     <Content Include="Views\Workout\Delete.aspx" />
     <Content Include="Views\Workout\Details.aspx" />
     <Content Include="Views\Workout\Edit.aspx" />
-    <Content Include="Views\Workout\Index.aspx" />
     <Content Include="Views\Workout\WorkoutDisplay.ascx" />
     <Content Include="Views\Workout\WorkoutForm.ascx" />
     <Content Include="Web.config" />
