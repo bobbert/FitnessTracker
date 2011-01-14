@@ -1,3 +1,13 @@
-This is a sample app written using the .NET MVC.
+Fitness Tracker is a sample app written using the .NET MVC framework.
 
-I will add more to this file when this app becomes more fleshed out.
+This is my latest branch of this app, converted from Visual Studio 2008 to VS2010.
+
+There is no local database added, but I will try to add scripts for creating the database in the near future.
+Database scripts will use SQL Server 2008 Express as a default, but will hopefully be easily tweaked for
+upgraded versions.
+
+The ASP.NET database still has be created separately, but this should happen automatically.  However, 
+the 'admin' role must be created separately, and any user that wished to edit ExerciseType data must be 
+a member of the 'admin' role.
+
+- Robert Phelps
