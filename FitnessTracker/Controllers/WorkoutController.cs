@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 using System.Web.Mvc;
 using System.Web.Security;
 using FitnessTracker.Models;
@@ -27,22 +28,8 @@ namespace FitnessTracker.Controllers
         [Authorize]
         public ActionResult Index(int workoutRegimenId)
         {
-            try
-            {
-                FitnessUser currentUser = workoutRepository.FindByUserName(User.Identity.Name).Single();
-                WorkoutRegimen parentRegimen = workoutRepository.GetWorkoutRegimen(currentUser, workoutRegimenId);
-
-                IEnumerable<WorkoutFormViewModel> workoutViewModels = (
-                        from wr in workoutRepository.FindAllWorkoutsByUserAndRegimen(currentUser, parentRegimen).ToList()
-                        select new WorkoutFormViewModel(wr, workoutRepository.DataContext)
-                    );
-                ViewData["workoutRegimenId"] = workoutRegimenId;  // render Workout Regimen Details based on this value
-                return View(workoutViewModels);
-            }
-            catch
-            {
-                return View("InvalidUser");
-            }
+            FitnessUser fitnessUser = workoutRepository.FindByUserName(User.Identity.Name).SingleOrDefault();
+            return RedirectToAction("Details", "WorkoutRegimen");
         }
 
         //
