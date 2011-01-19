@@ -89,7 +89,8 @@ namespace FitnessTracker.Controllers
                 wrfvmToAdd.WorkoutRegimen.WorkoutRegimenId = 0; // clear primary key value so that DB can create new value
                 workoutRegimenRepository.Add(currentUser, wrfvmToAdd.WorkoutRegimen);
                 workoutRegimenRepository.Save();
-                return RedirectToAction("Details", new { id = wrfvmToAdd.WorkoutRegimen.WorkoutRegimenId });
+                string redirectToPage = ((wrfvmToAdd.WorkoutRegimen.ExerciseType.HasDistanceData == 'Y') ? "Edit" : "Details");
+                return RedirectToAction(redirectToPage, new { id = wrfvmToAdd.WorkoutRegimen.WorkoutRegimenId });
             }
             catch
             {
@@ -111,6 +112,8 @@ namespace FitnessTracker.Controllers
                 FitnessUser currentUser = fitnessUserRepository.FindByUserName(User.Identity.Name).Single();
                 WorkoutRegimen workoutRegimen = workoutRegimenRepository.GetWorkoutRegimen(currentUser, id);
                 if (workoutRegimen == null) return View("NotFound");
+
+                ViewData["Distance"] = true;
                 return View(new WorkoutRegimenFormViewModel(workoutRegimen, 
                                                             fitnessUserRepository.DataContext));
             }

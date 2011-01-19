@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Database Name="FitnessTracker" Class="FitnessTrackerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FitnessTracker" Class="FitnessTrackerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\FitnessTracker.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FitnessTrackerConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.FitnessUsers" Member="FitnessUsers">
     <Type Name="FitnessUser">
@@ -8,23 +7,6 @@
       <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DateLastVisited" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="FitnessUser_WorkoutRegimen" Member="WorkoutRegimens" ThisKey="FitnessUserId" OtherKey="FitnessUserId" Type="WorkoutRegimen" />
-    </Type>
-  </Table>
-  <Table Name="dbo.WorkoutRegimens" Member="WorkoutRegimens">
-    <Type Name="WorkoutRegimen">
-      <Column Name="WorkoutRegimenId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FitnessUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="NumWeeks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DaysPerWeek" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="StartingNumMiles" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="FinishingNumMiles" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="StartingTotalSeconds" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FinishingTotalSeconds" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="WorkoutRegimen_Workout" Member="Workouts" ThisKey="WorkoutRegimenId" OtherKey="WorkoutRegimenId" Type="Workout" />
-      <Association Name="FitnessUser_WorkoutRegimen" Member="FitnessUser" ThisKey="FitnessUserId" OtherKey="FitnessUserId" Type="FitnessUser" IsForeignKey="true" />
-      <Association Name="ExerciseType_WorkoutRegimen" Member="ExerciseType" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="ExerciseType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Workouts" Member="Workouts">
@@ -37,21 +19,41 @@
       <Association Name="WorkoutRegimen_Workout" Member="WorkoutRegimen" ThisKey="WorkoutRegimenId" OtherKey="WorkoutRegimenId" Type="WorkoutRegimen" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.ExerciseTypes" Member="ExerciseTypes">
-    <Type Name="ExerciseType">
-      <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="HasDistanceData" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="MinSecondsPerMile" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaxSecondsPerMile" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="ExerciseType_WorkoutRegimen" Member="WorkoutRegimens" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="WorkoutRegimen" />
-    </Type>
-  </Table>
   <Table Name="dbo.DistanceUnits" Member="DistanceUnits">
     <Type Name="DistanceUnit">
       <Column Name="DistanceUnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UnitsPerMile" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="DistanceUnit_ExerciseType" Member="ExerciseTypes" ThisKey="DistanceUnitId" OtherKey="DefaultDistanceUnitId" Type="ExerciseType" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExerciseTypes" Member="ExerciseTypes">
+    <Type Name="ExerciseType">
+      <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DefaultDistanceUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="HasDistanceData" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="MinSecondsPerMile" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaxSecondsPerMile" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ExerciseType_WorkoutRegimen" Member="WorkoutRegimens" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="WorkoutRegimen" />
+      <Association Name="DistanceUnit_ExerciseType" Member="DistanceUnit" ThisKey="DefaultDistanceUnitId" OtherKey="DistanceUnitId" Type="DistanceUnit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorkoutRegimens" Member="WorkoutRegimens">
+    <Type Name="WorkoutRegimen">
+      <Column Name="WorkoutRegimenId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FitnessUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExerciseTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NumWeeks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DaysPerWeek" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartingNumMiles" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FinishingNumMiles" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="StartingTotalSeconds" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FinishingTotalSeconds" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="WorkoutRegimen_Workout" Member="Workouts" ThisKey="WorkoutRegimenId" OtherKey="WorkoutRegimenId" Type="Workout" />
+      <Association Name="ExerciseType_WorkoutRegimen" Member="ExerciseType" ThisKey="ExerciseTypeId" OtherKey="ExerciseTypeId" Type="ExerciseType" IsForeignKey="true" />
+      <Association Name="FitnessUser_WorkoutRegimen" Member="FitnessUser" ThisKey="FitnessUserId" OtherKey="FitnessUserId" Type="FitnessUser" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

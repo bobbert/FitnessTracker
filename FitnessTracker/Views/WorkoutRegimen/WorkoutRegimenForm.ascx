@@ -41,38 +41,42 @@
                 <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.DaysPerWeek) %>
             </div>
             
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.WorkoutRegimen.StartingNumMiles) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.StartingNumMiles))%>
-                <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingNumMiles) %>
-            </div>
+            <% if (ViewData["Distance"] != null)
+               { %>
+
+                <div class="editor-label">
+                    <%= Html.LabelFor(model => model.WorkoutRegimen.StartingNumMiles)%>
+                </div>
+                <div class="editor-field">
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.StartingNumMiles))%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingNumMiles)%>
+                </div>
             
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingNumMiles) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.FinishingNumMiles))%>
-                <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingNumMiles) %>
-            </div>
+                <div class="editor-label">
+                    <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingNumMiles)%>
+                </div>
+                <div class="editor-field">
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.FinishingNumMiles))%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingNumMiles)%>
+                </div>
             
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.WorkoutRegimen.StartingTotalSeconds) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingTotalSeconds) %>
-                <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingTotalSeconds) %>
-            </div>
+                <div class="editor-label">
+                    <%= Html.LabelFor(model => model.WorkoutRegimen.StartingTotalSeconds)%>
+                </div>
+                <div class="editor-field">
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingTotalSeconds)%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingTotalSeconds)%>
+                </div>
             
-            <div class="editor-label">
-                <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingTotalSeconds) %>
-            </div>
-            <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingTotalSeconds) %>
-                <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingTotalSeconds) %>
-            </div>
+                <div class="editor-label">
+                    <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingTotalSeconds)%>
+                </div>
+                <div class="editor-field">
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingTotalSeconds)%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingTotalSeconds)%>
+                </div>
             
+            <% } %>
             <p>
                 <input type="submit" value="Save" />
             </p>
