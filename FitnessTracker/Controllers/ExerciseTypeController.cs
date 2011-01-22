@@ -26,9 +26,9 @@ namespace FitnessTracker.Controllers
         public ActionResult Index()
         {
             List<ExerciseType> exerciseTypes = exerciseTypeRepository.FindAllExerciseTypes().ToList();
-            IEnumerable<ExerciseTypeFormViewModel> exerciseTypeViewModels = (
+            IEnumerable<ExerciseTypeViewModel> exerciseTypeViewModels = (
                     from et in exerciseTypes
-                    select new ExerciseTypeFormViewModel(et, exerciseTypeRepository.DataContext)
+                    select new ExerciseTypeViewModel(et, exerciseTypeRepository.DataContext)
                 );
 
             return View(exerciseTypeViewModels);
@@ -40,7 +40,7 @@ namespace FitnessTracker.Controllers
         {
             ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
             if (exerciseType == null) return View("NotFound");
-            return View(new ExerciseTypeFormViewModel(exerciseType, exerciseTypeRepository.DataContext));
+            return View(new ExerciseTypeViewModel(exerciseType, exerciseTypeRepository.DataContext));
         }
 
         //
@@ -75,7 +75,7 @@ namespace FitnessTracker.Controllers
         {
             ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
             if (exerciseType == null) return View("NotFound");
-            return View(new ExerciseTypeFormViewModel(exerciseType, exerciseTypeRepository.DataContext));
+            return View(new ExerciseTypeViewModel(exerciseType, exerciseTypeRepository.DataContext));
         }
 
         //
@@ -104,7 +104,7 @@ namespace FitnessTracker.Controllers
         {
             ExerciseType exerciseType = exerciseTypeRepository.GetExerciseType(id);
             if (exerciseType == null) return View("NotFound");
-            return View(new ExerciseTypeFormViewModel(exerciseType, exerciseTypeRepository.DataContext));
+            return View(new ExerciseTypeViewModel(exerciseType, exerciseTypeRepository.DataContext));
         }
 
         //

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<FitnessTracker.Models.WorkoutRegimenFormViewModel>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<FitnessTracker.Models.WorkoutRegimenViewModel>>" %>
 
 <asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
 	Index
@@ -33,10 +33,10 @@
                 Finishing # of Miles
             </th>
             <th>
-                Starting Duration (seconds)
+                Starting Duration
             </th>
             <th>
-                Finishing Duration (seconds)
+                Finishing Duration
             </th>
         </tr>
 
@@ -52,7 +52,7 @@
                 <%= Html.Encode(item.WorkoutRegimen.WorkoutRegimenId) %>
             </td>
             <td>
-                <%= Html.Encode(item.GetExerciseTypeName()) %>
+                <%= Html.ActionLink(item.GetExerciseTypeName(), "Details", "ExerciseType", new { id = item.WorkoutRegimen.ExerciseTypeId }, null)%> |
             </td>
             <td>
                 <%= Html.Encode(String.Format("{0:g}", item.WorkoutRegimen.StartDate)) %>
@@ -70,10 +70,18 @@
                 <%= Html.Encode(String.Format("{0:F}", item.WorkoutRegimen.FinishingNumMiles)) %>
             </td>
             <td>
-                <%= Html.Encode(item.WorkoutRegimen.StartingTotalSeconds) %>
+                <% if (item.WorkoutRegimen.StartingTotalSeconds.HasValue)
+                   { %>
+                    <%= Html.Encode(item.WorkoutRegimen.StartingMinutes)%> minutes, 
+                    <%= Html.Encode(item.WorkoutRegimen.StartingSeconds)%> seconds 
+                <% } %>
             </td>
             <td>
-                <%= Html.Encode(item.WorkoutRegimen.FinishingTotalSeconds) %>
+                <% if (item.WorkoutRegimen.FinishingTotalSeconds.HasValue)
+                   { %>
+                    <%= Html.Encode(item.WorkoutRegimen.FinishingMinutes)%> minutes, 
+                    <%= Html.Encode(item.WorkoutRegimen.FinishingSeconds)%> seconds
+                <% } %>
             </td>
         </tr>
     

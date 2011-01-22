@@ -37,13 +37,13 @@ namespace FitnessTracker.Models
 
         public double? GetMinSecondsPerUnit(ExerciseType exerciseType, DistanceUnit distanceUnit)
         {
-            if (exerciseType.HasDistanceData == null) return null;
+            if (exerciseType.HasDistanceData != 'Y') return null;
             return GetDistanceInUnits(distanceUnit, (double)exerciseType.MinSecondsPerMile.Value);
         }
 
         public double? GetMaxSecondsPerUnit(ExerciseType exerciseType, DistanceUnit distanceUnit)
         {
-            if (exerciseType.HasDistanceData == null) return null;
+            if (exerciseType.HasDistanceData != 'Y') return null;
             return GetDistanceInUnits(distanceUnit, (double)exerciseType.MaxSecondsPerMile.Value);
         }
 

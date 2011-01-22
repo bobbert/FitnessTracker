@@ -5,14 +5,14 @@ using System.Web.Mvc;
 
 namespace FitnessTracker.Models
 {
-    public class GenericFormViewModel
+    public class GenericViewModel
     {
 
         public FitnessTrackerDataContext dataContext { get; protected set; }
 
         // Constructors
 
-        public GenericFormViewModel() { }
+        public GenericViewModel() { }
 
         // Methods invoked within view
 

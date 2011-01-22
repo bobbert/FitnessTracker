@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace FitnessTracker.Models
 {
-    public class WorkoutRegimenFormViewModel : GenericFormViewModel {
+    public class WorkoutRegimenViewModel : GenericViewModel {
 
         private ExerciseTypeRepository exerciseTypeRepository;
 
@@ -17,9 +17,9 @@ namespace FitnessTracker.Models
 
         // Constructors
 
-        public WorkoutRegimenFormViewModel() :  this(new WorkoutRegimen(), new FitnessTrackerDataContext()) { }
+        public WorkoutRegimenViewModel() :  this(new WorkoutRegimen(), new FitnessTrackerDataContext()) { }
 
-        public WorkoutRegimenFormViewModel(WorkoutRegimen workoutRegimen, FitnessTrackerDataContext dc) 
+        public WorkoutRegimenViewModel(WorkoutRegimen workoutRegimen, FitnessTrackerDataContext dc) 
         {
             dataContext = dc;
             WorkoutRegimen = workoutRegimen;
@@ -55,6 +55,13 @@ namespace FitnessTracker.Models
         private SelectList CreateNumWeeksSelectList()
         {
             return CreateNumericalSelectList(1, 52, 1, "NumWeeks");
-        }    
+        }
+
+        // Other methods
+
+        public bool HasDistanceData()
+        {
+            return (WorkoutRegimen.ExerciseType.HasDistanceData == 'Y');
+        }
     }
 }

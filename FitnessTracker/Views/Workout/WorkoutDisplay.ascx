@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<FitnessTracker.Models.WorkoutFormViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<FitnessTracker.Models.WorkoutViewModel>" %>
 
     <fieldset>
         <legend>Fields</legend>
@@ -11,8 +11,8 @@
         
         <div class="display-label"># of Miles</div>
         <div class="display-field"><%= Html.Encode(String.Format("{0:F}", Model.Workout.NumMiles))%></div>
-        
-        <div class="display-label">Total Seconds</div>
-        <div class="display-field"><%= Html.Encode(Model.Workout.TotalSeconds)%></div>
-        
+
+        <div class="display-label">Duration</div>
+        <div class="display-field"><%= Html.Encode(Model.Workout.Minutes)%> minutes, 
+                                   <%= Html.Encode(Model.Workout.Seconds)%> seconds</div>
     </fieldset>

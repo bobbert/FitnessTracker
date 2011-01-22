@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<FitnessTracker.Models.WorkoutRegimenFormViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<FitnessTracker.Models.WorkoutRegimenViewModel>" %>
 
 <% using (Html.BeginForm()) {%>
     <%= Html.ValidationSummary(true) %>
@@ -43,37 +43,51 @@
             
             <% if (ViewData["Distance"] != null)
                { %>
+               <% if (Model.HasDistanceData())
+                  { %>
+
+                    <div class="editor-label">
+                        <%= Html.LabelFor(model => model.WorkoutRegimen.StartingNumMiles)%>
+                    </div>
+                    <div class="editor-field">
+                        <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.StartingNumMiles))%>
+                        <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingNumMiles)%>
+                    </div>
+            
+                    <div class="editor-label">
+                        <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingNumMiles)%>
+                    </div>
+                    <div class="editor-field">
+                        <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.FinishingNumMiles))%>
+                        <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingNumMiles)%>
+                    </div>
+            
+                <% } %>
+
+                <% var timeUnitAttr = new { maxlength = 5, size = 30 }; %>
 
                 <div class="editor-label">
-                    <%= Html.LabelFor(model => model.WorkoutRegimen.StartingNumMiles)%>
+                    <%= Html.LabelFor(model => model.WorkoutRegimen.StartingTotalSeconds) %>
                 </div>
                 <div class="editor-field">
-                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.StartingNumMiles))%>
-                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingNumMiles)%>
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingMinutes, timeUnitAttr)%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingMinutes)%>
+                    minutes, 
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingSeconds, timeUnitAttr)%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingSeconds)%>
+                    seconds
                 </div>
             
                 <div class="editor-label">
-                    <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingNumMiles)%>
+                    <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingTotalSeconds )%>
                 </div>
                 <div class="editor-field">
-                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingNumMiles, String.Format("{0:F}", Model.WorkoutRegimen.FinishingNumMiles))%>
-                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingNumMiles)%>
-                </div>
-            
-                <div class="editor-label">
-                    <%= Html.LabelFor(model => model.WorkoutRegimen.StartingTotalSeconds)%>
-                </div>
-                <div class="editor-field">
-                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.StartingTotalSeconds)%>
-                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.StartingTotalSeconds)%>
-                </div>
-            
-                <div class="editor-label">
-                    <%= Html.LabelFor(model => model.WorkoutRegimen.FinishingTotalSeconds)%>
-                </div>
-                <div class="editor-field">
-                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingTotalSeconds)%>
-                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingTotalSeconds)%>
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingMinutes, timeUnitAttr)%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingMinutes)%>
+                    minutes, 
+                    <%= Html.TextBoxFor(model => model.WorkoutRegimen.FinishingSeconds, timeUnitAttr)%>
+                    <%= Html.ValidationMessageFor(model => model.WorkoutRegimen.FinishingSeconds)%>
+                    seconds
                 </div>
             
             <% } %>

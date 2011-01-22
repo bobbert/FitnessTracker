@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<FitnessTracker.Models.WorkoutFormViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<FitnessTracker.Models.WorkoutViewModel>" %>
 
 <% using (Html.BeginForm()) {%>
     <%= Html.ValidationSummary(true) %>
@@ -22,12 +22,18 @@
                 <%= Html.ValidationMessageFor(model => model.Workout.NumMiles) %>
             </div>
             
+            <% var timeUnitAttr = new { maxlength = 5, size = 30 }; %>
+
             <div class="editor-label">
-                <%= Html.LabelFor(model => model.Workout.TotalSeconds) %>
+                <%= Html.LabelFor(model => model.Workout.TotalSeconds)%>
             </div>
             <div class="editor-field">
-                <%= Html.TextBoxFor(model => model.Workout.TotalSeconds) %>
-                <%= Html.ValidationMessageFor(model => model.Workout.TotalSeconds) %>
+                <%= Html.TextBoxFor(model => model.Workout.Minutes, timeUnitAttr)%>
+                <%= Html.ValidationMessageFor(model => model.Workout.Minutes)%>
+                minutes, 
+                <%= Html.TextBoxFor(model => model.Workout.Seconds, timeUnitAttr)%>
+                <%= Html.ValidationMessageFor(model => model.Workout.Seconds)%>
+                seconds
             </div>
             
             <p>

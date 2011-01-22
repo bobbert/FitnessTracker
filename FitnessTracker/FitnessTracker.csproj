@@ -75,27 +75,29 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\DistanceUnitsRepository.cs" />
-    <Compile Include="Models\ExerciseTypeFormViewModel.cs" />
-    <Compile Include="Models\ExerciseTypeRepository.cs" />
+    <Compile Include="Models\ExerciseTypeViewModel.cs" />
+    <Compile Include="Models\FitnessTracker.cs">
+      <DependentUpon>FitnessTracker.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Models\FitnessTracker.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FitnessTracker.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\FitnessUserIdentity.cs" />
-    <Compile Include="Models\FitnessUserRepository.cs" />
-    <Compile Include="Models\GenericFormViewModel.cs" />
-    <Compile Include="Models\IDistanceUnitsRepository.cs" />
-    <Compile Include="Models\IExerciseTypeRepository.cs" />
-    <Compile Include="Models\IFitnessUserRepository.cs" />
-    <Compile Include="Models\IWorkoutRegimenRepository.cs" />
-    <Compile Include="Models\IWorkoutRepository.cs" />
-    <Compile Include="Models\WorkoutFormViewModel.cs" />
-    <Compile Include="Models\WorkoutRegimenFormViewModel.cs" />
-    <Compile Include="Models\WorkoutRegimenRepository.cs" />
-    <Compile Include="Models\WorkoutRepository.cs" />
+    <Compile Include="Models\GenericViewModel.cs" />
+    <Compile Include="Models\WorkoutRegimenViewModel.cs" />
+    <Compile Include="Models\WorkoutViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DistanceUnitsRepository.cs" />
+    <Compile Include="Repositories\ExerciseTypeRepository.cs" />
+    <Compile Include="Repositories\FitnessUserRepository.cs" />
+    <Compile Include="Repositories\IDistanceUnitsRepository.cs" />
+    <Compile Include="Repositories\IExerciseTypeRepository.cs" />
+    <Compile Include="Repositories\IFitnessUserRepository.cs" />
+    <Compile Include="Repositories\IWorkoutRegimenRepository.cs" />
+    <Compile Include="Repositories\IWorkoutRepository.cs" />
+    <Compile Include="Repositories\WorkoutRegimenRepository.cs" />
+    <Compile Include="Repositories\WorkoutRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ASPNETDB.MDF">

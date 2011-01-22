@@ -42,7 +42,7 @@ namespace FitnessTracker.Controllers
                 FitnessUser currentUser = workoutRepository.FindByUserName(User.Identity.Name).Single();
                 Workout workout = workoutRepository.GetWorkout(currentUser, workoutRegimenId, id);
                 if (workout == null) return View("NotFound");
-                return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
+                return View(new WorkoutViewModel(workout, workoutRepository.DataContext));
             }
             catch
             {
@@ -60,13 +60,13 @@ namespace FitnessTracker.Controllers
                 StartingTime = DateTime.Today
             };
             workout.WorkoutRegimenId = workoutRegimenId;
-            return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
+            return View(new WorkoutViewModel(workout, workoutRepository.DataContext));
         }
 
         //
         // POST: /WorkoutRegimen/1/Workout/Create
         [HttpPost, Authorize]
-        public ActionResult Create(int workoutRegimenId, WorkoutFormViewModel wrfvmToAdd)
+        public ActionResult Create(int workoutRegimenId, WorkoutViewModel wrfvmToAdd)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace FitnessTracker.Controllers
                 {
                     StartingTime = DateTime.Today
                 };
-                return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
+                return View(new WorkoutViewModel(workout, workoutRepository.DataContext));
             }
         }
 
@@ -98,7 +98,7 @@ namespace FitnessTracker.Controllers
                 FitnessUser currentUser = workoutRepository.FindByUserName(User.Identity.Name).Single();
                 Workout workout = workoutRepository.GetWorkout(currentUser, workoutRegimenId, id);
                 if (workout == null) return View("NotFound");
-                return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
+                return View(new WorkoutViewModel(workout, workoutRepository.DataContext));
             }
             catch
             {
@@ -131,7 +131,7 @@ namespace FitnessTracker.Controllers
             }
             catch
             {
-                return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
+                return View(new WorkoutViewModel(workout, workoutRepository.DataContext));
             }
         }
 
@@ -145,7 +145,7 @@ namespace FitnessTracker.Controllers
                 FitnessUser currentUser = workoutRepository.FindByUserName(User.Identity.Name).Single();
                 Workout workout = workoutRepository.GetWorkout(currentUser, workoutRegimenId, id);
                 if (workout == null) return View("NotFound");
-                return View(new WorkoutFormViewModel(workout, workoutRepository.DataContext));
+                return View(new WorkoutViewModel(workout, workoutRepository.DataContext));
             }
             catch
             {

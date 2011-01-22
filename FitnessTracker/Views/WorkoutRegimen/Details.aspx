@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<FitnessTracker.Models.WorkoutRegimenFormViewModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<FitnessTracker.Models.WorkoutRegimenViewModel>" %>
 <%@ Import Namespace="System.Linq" %> 
 <%@ Import Namespace="FitnessTracker.Models" %>
 
@@ -30,7 +30,7 @@
                 # of Miles
             </th>
             <th>
-                Duration (seconds)
+                Duration
             </th>
         </tr>
 
@@ -53,7 +53,8 @@
                 <%= Html.Encode(String.Format("{0:F}", workout.NumMiles))%>
             </td>
             <td>
-                <%= Html.Encode(workout.TotalSeconds)%>
+                <%= Html.Encode(workout.Minutes)%> minutes, 
+                <%= Html.Encode(workout.Seconds)%> seconds
             </td>
         </tr>
     
