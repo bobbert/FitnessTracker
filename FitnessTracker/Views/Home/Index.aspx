@@ -12,6 +12,6 @@
 
     <% if (Context.User.Identity.IsAuthenticated)
        { %>
-        <%= Html.ActionLink("View My Workout Data", "Index", "WorkoutRegimen")%>
+        <%= Html.ActionLink("View My Workout Data", "Index", "WorkoutRegimen") %>
     <% } %>
 </asp:Content>

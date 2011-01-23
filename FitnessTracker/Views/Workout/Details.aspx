@@ -12,8 +12,8 @@
 
     <p>
         <%= Html.ActionLink("Edit", "Edit", new { workoutRegimenId = Model.Workout.WorkoutRegimenId,
-                                                  id = Model.Workout.WorkoutId })%> |
-        <%= Html.ActionLink("Back to List", "Index", new { workoutRegimenId = Model.Workout.WorkoutRegimenId } )%>
+                                                  id = Model.Workout.WorkoutId }) %> |
+        <%= Html.ActionLink("Back to List", "Index", new { workoutRegimenId = Model.Workout.WorkoutRegimenId } ) %>
     </p>
 
 </asp:Content>

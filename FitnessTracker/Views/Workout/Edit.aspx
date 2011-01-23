@@ -11,7 +11,7 @@
     <% Html.RenderPartial("WorkoutForm"); %>
 
 <div>
-    <%= Html.ActionLink("Back to List", "Index", new { workoutRegimenId = Model.Workout.WorkoutRegimenId })%>
+    <%= Html.ActionLink("Back to List", "Index", new { workoutRegimenId = Model.Workout.WorkoutRegimenId }) %>
 </div>
 
 </asp:Content>

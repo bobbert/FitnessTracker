@@ -10,7 +10,7 @@
         <div class="display-field"><%= Html.Encode(Model.ExerciseType.Name) %></div>
         
         <div class="display-label">IsDistanceUsed</div>
-        <div class="display-field"><%= Html.Encode(Model.ExerciseType.HasDistanceData)%></div>
+        <div class="display-field"><%= Html.Encode(Model.ExerciseType.HasDistanceData) %></div>
         
         <div class="display-label">MinSecondsPerMile</div>
         <div class="display-field"><%= Html.Encode(Model.ExerciseType.MinSecondsPerMile) %></div>

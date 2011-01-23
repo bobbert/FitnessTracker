@@ -12,7 +12,7 @@
 
     <p>
         <% if (User.IsInRole("admin")) { %>
-            <%= Html.ActionLink("Edit", "Edit", new { id = Model.ExerciseType.ExerciseTypeId })%> |
+            <%= Html.ActionLink("Edit", "Edit", new { id = Model.ExerciseType.ExerciseTypeId }) %> |
         <% } %>
         <%= Html.ActionLink("Back to List", "Index") %>
     </p>

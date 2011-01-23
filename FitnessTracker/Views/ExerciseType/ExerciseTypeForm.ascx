@@ -19,8 +19,8 @@
             </div>
             <div class="editor-field">
                 <%= Html.DropDownListFor(model => model.HasDistanceDataSelectList,
-                                         Model.HasDistanceDataSelectList)%>
-                <%= Html.ValidationMessageFor(model => model.ExerciseType.HasDistanceData)%>
+                                         Model.HasDistanceDataSelectList) %>
+                <%= Html.ValidationMessageFor(model => model.ExerciseType.HasDistanceData) %>
             </div>
             
             <div class="editor-label">

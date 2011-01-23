@@ -11,7 +11,7 @@
     <% Html.RenderPartial("WorkoutRegimenForm"); %>
 
 <div>
-    <%= Html.ActionLink("Details", "Details", new { id = Model.WorkoutRegimen.WorkoutRegimenId })%> |
+    <%= Html.ActionLink("Details", "Details", new { id = Model.WorkoutRegimen.WorkoutRegimenId }) %> |
     <%= Html.ActionLink("Back to List", "Index") %>
 </div>
 

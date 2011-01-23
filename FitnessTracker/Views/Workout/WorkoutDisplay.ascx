@@ -7,12 +7,14 @@
         <div class="display-field"><%= Html.Encode(Model.Workout.WorkoutId) %></div>
         
         <div class="display-label">Starting Time</div>
-        <div class="display-field"><%= Html.Encode(String.Format("{0:g}", Model.Workout.StartingTime))%></div>
+        <div class="display-field"><%= Html.Encode(String.Format("{0:g}", Model.Workout.StartingTime)) %></div>
         
-        <div class="display-label"># of Miles</div>
-        <div class="display-field"><%= Html.Encode(String.Format("{0:F}", Model.Workout.NumMiles))%></div>
+        <div class="display-label">Distance</div>
+        <div class="display-field"><%= Html.Encode(String.Format("{0:F}", Model.Workout.NumDistanceUnits)) %>
+                                   <%= Html.Encode(Model.Workout.DistanceUnit_Name) %>
+        </div>
 
         <div class="display-label">Duration</div>
-        <div class="display-field"><%= Html.Encode(Model.Workout.Minutes)%> minutes, 
-                                   <%= Html.Encode(Model.Workout.Seconds)%> seconds</div>
+        <div class="display-field"><%= Html.Encode(Model.Workout.Minutes) %> minutes, 
+                                   <%= Html.Encode(Model.Workout.Seconds) %> seconds</div>
     </fieldset>

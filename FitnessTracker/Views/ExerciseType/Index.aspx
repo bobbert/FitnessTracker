@@ -34,10 +34,10 @@
             <td>
                 <% if (User.IsInRole("admin")) { %>
                     <%= Html.ActionLink("Edit", "Edit", new { id=item.ExerciseType.ExerciseTypeId }) %> |
-                    <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseType.ExerciseTypeId })%> |
-                    <%= Html.ActionLink("Delete", "Delete", new { id=item.ExerciseType.ExerciseTypeId })%>
+                    <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseType.ExerciseTypeId }) %> |
+                    <%= Html.ActionLink("Delete", "Delete", new { id=item.ExerciseType.ExerciseTypeId }) %>
                 <% } else { %>
-                    <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseType.ExerciseTypeId })%>
+                    <%= Html.ActionLink("Details", "Details", new { id=item.ExerciseType.ExerciseTypeId }) %>
                 <% } %>
             </td>
             <td>

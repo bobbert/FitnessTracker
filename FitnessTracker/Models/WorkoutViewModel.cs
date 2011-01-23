@@ -10,6 +10,7 @@ namespace FitnessTracker.Models
         private ExerciseTypeRepository exerciseTypeRepository;
 
         public Workout Workout { get; private set; }
+        public SelectList DistanceUnitTypeList { get; private set; }
 
         // Constructors
 
@@ -20,9 +21,15 @@ namespace FitnessTracker.Models
             dataContext = dc;
             Workout = workout;
             exerciseTypeRepository = new ExerciseTypeRepository(dataContext);
+            DistanceUnitTypeList = CreateDistanceUnitSelectList();
         }
 
         // Methods invoked within view
+
+        private SelectList CreateDistanceUnitSelectList()
+        {
+            return new SelectList(exerciseTypeRepository.FindAllDistanceUnits(), "DistanceUnitId", "Name");
+        }
 
     }
 }
