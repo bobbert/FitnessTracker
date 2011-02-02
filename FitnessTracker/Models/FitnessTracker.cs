@@ -1,13 +1,25 @@
+using System;
+using System.Data;
+using System.Linq;
+using System.Collections.Generic;
+
 namespace FitnessTracker.Models
 {
     partial class Workout
     {
-        public string DistanceUnit_Name
+        // Custom fields for managing week-to-week data
+
+        public int WeekNumber
         {
-            get { if (DistanceUnit == null) return string.Empty; return DistanceUnit.Name; }
+            get { return 1 + ((StartingTime - WorkoutRegimen.StartDate).Days / 7); }
         }
 
         // Distance custom fields for converting custom distance units to miles
+
+        public string DistanceUnit_Name
+        {
+            get { return (DistanceUnit == null) ? string.Empty : DistanceUnit.Name; }
+        }
 
         public double? NumMiles
         {
@@ -34,6 +46,57 @@ namespace FitnessTracker.Models
 
     partial class WorkoutRegimen
     {
+        // Custom fields for managing week-to-week data
+
+        public DateTime FinishDate
+        {
+            get { return StartDate.AddDays(7 * NumWeeks); }
+        }
+
+        public int CurrentWeek
+        {
+            get 
+            { 
+                int weekDifference = (DateTime.Now - StartDate).Days / 7; 
+                return ((weekDifference > NumWeeks) ? NumWeeks : weekDifference); 
+            }
+        }
+
+        public double CurrentWeekCompletionPct
+        {
+            get
+            {
+                double hoursInCurrentWeek = (DateTime.Now - StartDate).TotalHours % (24.0D * 7.0D);
+                return (hoursInCurrentWeek / (24.0D * 7.0D)) * 100.0D;
+            }
+        }
+
+        public bool IsFinished
+        {
+            get { return (FinishDate < DateTime.Now); }
+        }
+
+        public DateTime StartDateForWeek(int weekNumber)
+        {
+            if ((weekNumber < 1) || (weekNumber > NumWeeks)) return DateTime.MinValue;
+            return StartDate.AddDays(7 * (weekNumber - 1));
+        }
+
+        public List<Workout> WorkoutsForWeek(int weekNumber)
+        {
+            return Workouts.Where(w => w.WeekNumber == weekNumber).ToList();
+        }
+
+        public Dictionary<int, List<Workout>> WorkoutsByWeek()
+        {
+            Dictionary<int, List<Workout>> workoutsByWeek = new Dictionary<int, List<Workout>>();
+            for (int weekNum = 1; weekNum <= CurrentWeek; weekNum++)
+                workoutsByWeek.Add(weekNum, WorkoutsForWeek(weekNum));
+            return workoutsByWeek;
+        }
+
+        // Distance custom fields for converting custom distance units to miles
+
         public string StartingDistanceUnit_Name
         {
             get { return ((StartingDistanceUnit == null) ? string.Empty : StartingDistanceUnit.Name); }
@@ -47,8 +110,6 @@ namespace FitnessTracker.Models
         {
             return ((ExerciseType.HasDistanceData == 'Y') && (ExerciseType.DefaultDistanceUnitId.HasValue));
         }
-
-        // Distance custom fields for converting custom distance units to miles
 
         public double? StartingNumMiles
         {
